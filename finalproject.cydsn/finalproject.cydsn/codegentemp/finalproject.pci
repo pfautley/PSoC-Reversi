@@ -1,0 +1,37 @@
+# finalproject
+# 2015-06-04 19:15:58Z
+
+# IO_0@[IOP=(1)][IoId=(0)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 0
+# IO_1@[IOP=(1)][IoId=(1)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 1
+# IO_3@[IOP=(1)][IoId=(3)] is reserved: SWDDebugEnabled
+dont_use_io iocell 1 3
+set_io "A(0)" iocell 4 4
+set_io "B(0)" iocell 4 5
+set_io "B1(0)" iocell 4 6
+set_io "B2(0)" iocell 0 1
+set_io "C(0)" iocell 4 3
+set_io "G1(0)" iocell 3 7
+set_io "G2(0)" iocell 0 0
+set_io "LAT(0)" iocell 4 1
+set_io "OEpin(0)" iocell 4 0
+set_io "R1(0)" iocell 3 6
+set_io "R2(0)" iocell 0 2
+set_io "Rx_1(0)" iocell 1 6
+set_io "Tx_1(0)" iocell 1 7
+set_io "\LCD_Char:LCDPort(0)\" iocell 2 0
+set_io "\LCD_Char:LCDPort(1)\" iocell 2 1
+set_io "\LCD_Char:LCDPort(2)\" iocell 2 2
+set_io "\LCD_Char:LCDPort(3)\" iocell 2 3
+set_io "\LCD_Char:LCDPort(4)\" iocell 2 4
+set_io "\LCD_Char:LCDPort(5)\" iocell 2 5
+set_io "\LCD_Char:LCDPort(6)\" iocell 2 6
+set_io "\USBUART_1:Dm(0)\" iocell 15 7
+set_io "\USBUART_1:Dp(0)\" iocell 15 6
+set_location "\USBUART_1:USB\" usbcell -1 -1 0
+set_io "\emFile_1:SPI0_CS(0)\" iocell 5 6
+set_io "\emFile_1:miso0(0)\" iocell 5 0
+set_io "\emFile_1:mosi0(0)\" iocell 5 4
+set_io "\emFile_1:sclk0(0)\" iocell 5 2
+set_io "clock(0)" iocell 4 2

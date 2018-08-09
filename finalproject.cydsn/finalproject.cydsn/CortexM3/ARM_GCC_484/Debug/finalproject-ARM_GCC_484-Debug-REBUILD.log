@@ -1,0 +1,243 @@
+--------------- Rebuild Started: 05/31/2015 19:54:09 Project: finalproject, Configuration: ARM GCC 4.8.4 Debug ---------------
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\main.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\cyfitter_cfg.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\cymetadata.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\red.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\red_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\clk.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\clk_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\CBA.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\CBA_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\Latch.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\Latch_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\OE.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\OE_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\blue.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\blue_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\green.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\green_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\Timer_1.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\Timer_1_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\isr_1.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\Cm3Start.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\CyBootAsmGnu.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\CyDmac.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\CyFlash.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\CyLib.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\cyPm.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\CySpc.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\cyutils.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\blue2.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\blue2_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\red2.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\red2_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\green2.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\green2_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_audio.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_boot.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_cdc.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_cls.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_descr.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_drv.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_episr.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_hid.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_pm.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_std.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_vnd.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_midi.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\LCD_Char.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\LCD_Char_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_ep3_dma.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_ep2_dma.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_ep1_dma.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_Dm.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\USBUART_1_Dp.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\LCD_Char_LCDPort.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\UART_1.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\UART_1_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\UART_1_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\UART_1_BOOT.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\UART_1_IntClock.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\R2.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\R1.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\G1.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\B1.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\clock.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\LAT.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\OEpin.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\G2.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\B2.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\A.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\B.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\C.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_ConfigMMC_SPI.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_MMC_HW_SPI.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_mosi0.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_Clock_1.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_miso0.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_sclk0.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0_CS.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\isr_Tx.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\isr_Rx.o"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\finalproject.hex"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\finalproject.elf"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\finalproject.map"
+Deleting file ".\finalproject.cycdx"
+Deleting file ".\finalproject.svd"
+Deleting file ".\finalproject.rpt"
+Deleting file ".\finalproject_timing.html"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\.deps\C_FILE.P"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\.deps\ARM_C_FILE.P"
+Deleting file ".\CortexM3\ARM_GCC_484\Debug\.deps\GNU_ARM_ASM_FILE.P"
+cydsfit.exe -.appdatapath "C:\Users\pfautley\AppData\Local\Cypress Semiconductor\PSoC Creator\3.1" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -p C:\Users\pfautley\Downloads\finalproject.cydsn\finalproject.cydsn\finalproject.cyprj -d CY8C5868AXI-LP035 -s C:\Users\pfautley\Downloads\finalproject.cydsn\finalproject.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+Elaborating Design...
+HDL Generation ...
+Synthesis ...
+Place and Route ...
+Tech mapping ...
+ADD: pft.M0040: information: The following 2 pin(s) will be assigned a location by the fitter: \USBUART_1:Dm(0)\, \USBUART_1:Dp(0)\
+Analog Placement ...
+Analog Routing ...
+Analog Code Generation ...
+Digital Placement ...
+Digital Routing ...
+Bitstream Generation ...
+Static timing analysis ...
+Warning: sta.M0019: finalproject_timing.html: Warning-1366: Setup time violation found in a path from clock ( emFile_1_Clock_1 ) to clock ( emFile_1_Clock_1 ). (File=C:\Users\pfautley\Downloads\finalproject.cydsn\finalproject.cydsn\finalproject_timing.html)
+Warning: sta.M0019: finalproject_timing.html: Warning-1366: Setup time violation found in a path from clock ( CyBUS_CLK ) to clock ( CyBUS_CLK ). (File=C:\Users\pfautley\Downloads\finalproject.cydsn\finalproject.cydsn\finalproject_timing.html)
+API Generation ...
+Dependency Generation ...
+Clean Temporary Files ...
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/main.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\main.c -o .\CortexM3\ARM_GCC_484\Debug\main.o
+.\main.c: In function 'RxHandler':
+.\main.c:177:13: warning: pointer targets in passing argument 1 of 'USBUART_1_PutData' differ in signedness [-Wpointer-sign]
+             USBUART_1_PutData(wifiRxBuffer, rxCount);
+             ^
+In file included from .\Generated_Source\PSoC5/project.h:60:0,
+                 from .\main.c:12:
+.\Generated_Source\PSoC5/USBUART_1_cdc.h:31:10: note: expected 'const uint8 *' but argument is of type 'char8 *'
+     void USBUART_1_PutData(const uint8* pData, uint16 length) ;
+          ^
+.\main.c:165:11: warning: unused variable 'rxData' [-Wunused-variable]
+     char8 rxData;
+           ^
+.\main.c: In function 'main':
+.\main.c:217:11: warning: unused variable 'size' [-Wunused-variable]
+     uint8 size = 64;
+           ^
+.\main.c:216:11: warning: unused variable 'RxBuffer1' [-Wunused-variable]
+     uint8 RxBuffer1[BUFFER_SIZE] = {0};
+           ^
+.\main.c:215:11: warning: unused variable 'RxBuffer0' [-Wunused-variable]
+     uint8 RxBuffer0[BUFFER_SIZE] = {0};
+           ^
+.\main.c:212:12: warning: unused variable 'bytesReceived' [-Wunused-variable]
+     uint16 bytesReceived = 0;
+            ^
+.\main.c:211:12: warning: unused variable 'count1' [-Wunused-variable]
+     uint16 count1 = 0;
+            ^
+.\main.c:210:12: warning: unused variable 'count' [-Wunused-variable]
+     uint16 count = 0;
+            ^
+.\main.c: In function 'wincheck':
+.\main.c:431:9: warning: unused variable 'value' [-Wunused-variable]
+     int value = 0;
+         ^
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/cyfitter_cfg.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\cyfitter_cfg.c -o .\CortexM3\ARM_GCC_484\Debug\cyfitter_cfg.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/cymetadata.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\cymetadata.c -o .\CortexM3\ARM_GCC_484\Debug\cymetadata.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/red.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\red.c -o .\CortexM3\ARM_GCC_484\Debug\red.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/red_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\red_PM.c -o .\CortexM3\ARM_GCC_484\Debug\red_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/clk.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\clk.c -o .\CortexM3\ARM_GCC_484\Debug\clk.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/clk_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\clk_PM.c -o .\CortexM3\ARM_GCC_484\Debug\clk_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/CBA.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\CBA.c -o .\CortexM3\ARM_GCC_484\Debug\CBA.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/CBA_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\CBA_PM.c -o .\CortexM3\ARM_GCC_484\Debug\CBA_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/Latch.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\Latch.c -o .\CortexM3\ARM_GCC_484\Debug\Latch.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/Latch_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\Latch_PM.c -o .\CortexM3\ARM_GCC_484\Debug\Latch_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/OE.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\OE.c -o .\CortexM3\ARM_GCC_484\Debug\OE.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/OE_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\OE_PM.c -o .\CortexM3\ARM_GCC_484\Debug\OE_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/blue.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\blue.c -o .\CortexM3\ARM_GCC_484\Debug\blue.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/blue_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\blue_PM.c -o .\CortexM3\ARM_GCC_484\Debug\blue_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/green.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\green.c -o .\CortexM3\ARM_GCC_484\Debug\green.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/green_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\green_PM.c -o .\CortexM3\ARM_GCC_484\Debug\green_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/Timer_1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\Timer_1.c -o .\CortexM3\ARM_GCC_484\Debug\Timer_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/Timer_1_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\Timer_1_PM.c -o .\CortexM3\ARM_GCC_484\Debug\Timer_1_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/isr_1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\isr_1.c -o .\CortexM3\ARM_GCC_484\Debug\isr_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/Cm3Start.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\Cm3Start.c -o .\CortexM3\ARM_GCC_484\Debug\Cm3Start.o
+arm-none-eabi-as.exe -mcpu=cortex-m3 -mthumb -I. -I.\Generated_Source\PSoC5 -alh=.\CortexM3\ARM_GCC_484\Debug/CyBootAsmGnu.lst -g -W -o .\CortexM3\ARM_GCC_484\Debug\CyBootAsmGnu.o .\Generated_Source\PSoC5\CyBootAsmGnu.s
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/CyDmac.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\CyDmac.c -o .\CortexM3\ARM_GCC_484\Debug\CyDmac.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/CyFlash.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\CyFlash.c -o .\CortexM3\ARM_GCC_484\Debug\CyFlash.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/CyLib.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\CyLib.c -o .\CortexM3\ARM_GCC_484\Debug\CyLib.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/cyPm.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\cyPm.c -o .\CortexM3\ARM_GCC_484\Debug\cyPm.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/CySpc.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\CySpc.c -o .\CortexM3\ARM_GCC_484\Debug\CySpc.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/cyutils.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\cyutils.c -o .\CortexM3\ARM_GCC_484\Debug\cyutils.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/blue2.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\blue2.c -o .\CortexM3\ARM_GCC_484\Debug\blue2.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/blue2_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\blue2_PM.c -o .\CortexM3\ARM_GCC_484\Debug\blue2_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/red2.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\red2.c -o .\CortexM3\ARM_GCC_484\Debug\red2.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/red2_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\red2_PM.c -o .\CortexM3\ARM_GCC_484\Debug\red2_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/green2.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\green2.c -o .\CortexM3\ARM_GCC_484\Debug\green2.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/green2_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\green2_PM.c -o .\CortexM3\ARM_GCC_484\Debug\green2_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_audio.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_audio.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_audio.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_boot.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_boot.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_boot.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_cdc.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_cdc.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_cdc.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_cls.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_cls.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_cls.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_descr.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_descr.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_descr.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_drv.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_drv.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_drv.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_episr.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_episr.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_episr.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_hid.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_hid.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_hid.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_pm.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_pm.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_pm.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_std.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_std.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_std.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_vnd.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_vnd.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_vnd.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_midi.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_midi.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_midi.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/LCD_Char.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\LCD_Char.c -o .\CortexM3\ARM_GCC_484\Debug\LCD_Char.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/LCD_Char_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\LCD_Char_PM.c -o .\CortexM3\ARM_GCC_484\Debug\LCD_Char_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_ep3_dma.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_ep3_dma.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_ep3_dma.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_ep2_dma.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_ep2_dma.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_ep2_dma.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_ep1_dma.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_ep1_dma.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_ep1_dma.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_Dm.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_Dm.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_Dm.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/USBUART_1_Dp.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\USBUART_1_Dp.c -o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_Dp.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/LCD_Char_LCDPort.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\LCD_Char_LCDPort.c -o .\CortexM3\ARM_GCC_484\Debug\LCD_Char_LCDPort.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/UART_1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\UART_1.c -o .\CortexM3\ARM_GCC_484\Debug\UART_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/UART_1_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\UART_1_PM.c -o .\CortexM3\ARM_GCC_484\Debug\UART_1_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/UART_1_INT.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\UART_1_INT.c -o .\CortexM3\ARM_GCC_484\Debug\UART_1_INT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/UART_1_BOOT.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\UART_1_BOOT.c -o .\CortexM3\ARM_GCC_484\Debug\UART_1_BOOT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/UART_1_IntClock.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\UART_1_IntClock.c -o .\CortexM3\ARM_GCC_484\Debug\UART_1_IntClock.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/R2.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\R2.c -o .\CortexM3\ARM_GCC_484\Debug\R2.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/R1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\R1.c -o .\CortexM3\ARM_GCC_484\Debug\R1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/G1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\G1.c -o .\CortexM3\ARM_GCC_484\Debug\G1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/B1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\B1.c -o .\CortexM3\ARM_GCC_484\Debug\B1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/clock.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\clock.c -o .\CortexM3\ARM_GCC_484\Debug\clock.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/LAT.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\LAT.c -o .\CortexM3\ARM_GCC_484\Debug\LAT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/OEpin.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\OEpin.c -o .\CortexM3\ARM_GCC_484\Debug\OEpin.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/G2.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\G2.c -o .\CortexM3\ARM_GCC_484\Debug\G2.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/B2.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\B2.c -o .\CortexM3\ARM_GCC_484\Debug\B2.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/A.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\A.c -o .\CortexM3\ARM_GCC_484\Debug\A.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/B.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\B.c -o .\CortexM3\ARM_GCC_484\Debug\B.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/C.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\C.c -o .\CortexM3\ARM_GCC_484\Debug\C.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_ConfigMMC_SPI.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_ConfigMMC_SPI.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_ConfigMMC_SPI.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_MMC_HW_SPI.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_MMC_HW_SPI.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_MMC_HW_SPI.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_PM.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_SPI0.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_SPI0.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_SPI0_PM.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_SPI0_PM.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0_PM.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_SPI0_INT.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_SPI0_INT.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0_INT.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_mosi0.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_mosi0.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_mosi0.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_Clock_1.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_Clock_1.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_Clock_1.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_miso0.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_miso0.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_miso0.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_sclk0.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_sclk0.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_sclk0.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/emFile_1_SPI0_CS.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\emFile_1_SPI0_CS.c -o .\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0_CS.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/isr_Tx.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\isr_Tx.c -o .\CortexM3\ARM_GCC_484\Debug\isr_Tx.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I.\emFile_V322c\Code\Include\PSoC5\emf32nOS -I.\emFile_V322c\Code\Include\PSoC5 -I. -I.\Generated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_484\Debug/isr_Rx.lst -g -D DEBUG -Wall -ffunction-sections -O0 -c .\Generated_Source\PSoC5\isr_Rx.c -o .\CortexM3\ARM_GCC_484\Debug\isr_Rx.o
+arm-none-eabi-ar.exe -rs .\CortexM3\ARM_GCC_484\Debug\finalproject.a .\CortexM3\ARM_GCC_484\Debug\cyfitter_cfg.o .\CortexM3\ARM_GCC_484\Debug\red.o .\CortexM3\ARM_GCC_484\Debug\red_PM.o .\CortexM3\ARM_GCC_484\Debug\clk.o .\CortexM3\ARM_GCC_484\Debug\clk_PM.o .\CortexM3\ARM_GCC_484\Debug\CBA.o .\CortexM3\ARM_GCC_484\Debug\CBA_PM.o .\CortexM3\ARM_GCC_484\Debug\Latch.o .\CortexM3\ARM_GCC_484\Debug\Latch_PM.o .\CortexM3\ARM_GCC_484\Debug\OE.o .\CortexM3\ARM_GCC_484\Debug\OE_PM.o .\CortexM3\ARM_GCC_484\Debug\blue.o .\CortexM3\ARM_GCC_484\Debug\blue_PM.o .\CortexM3\ARM_GCC_484\Debug\green.o .\CortexM3\ARM_GCC_484\Debug\green_PM.o .\CortexM3\ARM_GCC_484\Debug\Timer_1.o .\CortexM3\ARM_GCC_484\Debug\Timer_1_PM.o .\CortexM3\ARM_GCC_484\Debug\isr_1.o .\CortexM3\ARM_GCC_484\Debug\CyBootAsmGnu.o .\CortexM3\ARM_GCC_484\Debug\CyDmac.o .\CortexM3\ARM_GCC_484\Debug\CyFlash.o .\CortexM3\ARM_GCC_484\Debug\CyLib.o .\CortexM3\ARM_GCC_484\Debug\cyPm.o .\CortexM3\ARM_GCC_484\Debug\CySpc.o .\CortexM3\ARM_GCC_484\Debug\cyutils.o .\CortexM3\ARM_GCC_484\Debug\blue2.o .\CortexM3\ARM_GCC_484\Debug\blue2_PM.o .\CortexM3\ARM_GCC_484\Debug\red2.o .\CortexM3\ARM_GCC_484\Debug\red2_PM.o .\CortexM3\ARM_GCC_484\Debug\green2.o .\CortexM3\ARM_GCC_484\Debug\green2_PM.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_audio.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_boot.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_cdc.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_cls.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_descr.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_drv.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_episr.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_hid.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_pm.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_std.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_vnd.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_midi.o .\CortexM3\ARM_GCC_484\Debug\LCD_Char.o .\CortexM3\ARM_GCC_484\Debug\LCD_Char_PM.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_ep3_dma.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_ep2_dma.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_ep1_dma.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_Dm.o .\CortexM3\ARM_GCC_484\Debug\USBUART_1_Dp.o .\CortexM3\ARM_GCC_484\Debug\LCD_Char_LCDPort.o .\CortexM3\ARM_GCC_484\Debug\UART_1.o .\CortexM3\ARM_GCC_484\Debug\UART_1_PM.o .\CortexM3\ARM_GCC_484\Debug\UART_1_INT.o .\CortexM3\ARM_GCC_484\Debug\UART_1_BOOT.o .\CortexM3\ARM_GCC_484\Debug\UART_1_IntClock.o .\CortexM3\ARM_GCC_484\Debug\R2.o .\CortexM3\ARM_GCC_484\Debug\R1.o .\CortexM3\ARM_GCC_484\Debug\G1.o .\CortexM3\ARM_GCC_484\Debug\B1.o .\CortexM3\ARM_GCC_484\Debug\clock.o .\CortexM3\ARM_GCC_484\Debug\LAT.o .\CortexM3\ARM_GCC_484\Debug\OEpin.o .\CortexM3\ARM_GCC_484\Debug\G2.o .\CortexM3\ARM_GCC_484\Debug\B2.o .\CortexM3\ARM_GCC_484\Debug\A.o .\CortexM3\ARM_GCC_484\Debug\B.o .\CortexM3\ARM_GCC_484\Debug\C.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_ConfigMMC_SPI.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_MMC_HW_SPI.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_PM.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0_PM.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0_INT.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_mosi0.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_Clock_1.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_miso0.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_sclk0.o .\CortexM3\ARM_GCC_484\Debug\emFile_1_SPI0_CS.o .\CortexM3\ARM_GCC_484\Debug\isr_Tx.o .\CortexM3\ARM_GCC_484\Debug\isr_Rx.o
+arm-none-eabi-ar.exe: creating .\CortexM3\ARM_GCC_484\Debug\finalproject.a
+arm-none-eabi-gcc.exe -Wl,--start-group -o .\CortexM3\ARM_GCC_484\Debug\finalproject.elf .\CortexM3\ARM_GCC_484\Debug\main.o .\CortexM3\ARM_GCC_484\Debug\cymetadata.o .\CortexM3\ARM_GCC_484\Debug\Cm3Start.o .\CortexM3\ARM_GCC_484\Debug\finalproject.a "C:\Program Files\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CortexM3\ARM_GCC_484\Debug\CyComponentLibrary.a" -mthumb -march=armv7-m -mfix-cortex-m3-ldrd -l emf32nosnlfn -L .\emFile_V322c\Code\Include\PSoC5\emf32nOS -L .\emFile_V322c\LinkLibrary\PSoC5\GCC -L .\emFile_V322c\LinkLibrary\PSoC5 -Wl,-Map,.\CortexM3\ARM_GCC_484\Debug/finalproject.map -T .\Generated_Source\PSoC5\cm3gcc.ld -g -specs=nano.specs "-u _printf_float" "" -Wl,--gc-sections -Wl,--end-group
+cyelftool.exe -C C:\Users\pfautley\Downloads\finalproject.cydsn\finalproject.cydsn\CortexM3\ARM_GCC_484\Debug\finalproject.elf --flash_size 262144 --flash_row_size 256
+cyelftool.exe -S C:\Users\pfautley\Downloads\finalproject.cydsn\finalproject.cydsn\CortexM3\ARM_GCC_484\Debug\finalproject.elf
+Flash used: 20222 of 262144 bytes (7.7 %).
+SRAM used: 7893 of 65536 bytes (12.0 %). Stack: 2048 bytes. Heap: 128 bytes.
+--------------- Rebuild Succeeded: 05/31/2015 19:54:55 ---------------

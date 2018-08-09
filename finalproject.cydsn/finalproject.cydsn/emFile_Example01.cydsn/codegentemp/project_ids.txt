@@ -1,0 +1,7 @@
+C:\Users\pfautley\Downloads\finalproject.cydsn\finalproject.cydsn\finalproject.cyprj|587fbff6-10f2-4084-9a1a-bbcf8a5825ac
+C:\Program Files\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|788e7815-1e2b-445f-ba9b-43c15eeb9bd5
+C:\Program Files\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|b54b8711-a796-4b40-bd2d-fdeed15f97c6
+C:\Program Files\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|9de9d6ae-dde9-4e39-8561-e7438bf2eb42
+C:\Program Files\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|3e29bf4a-cd3a-4d50-a3de-67b39b50e221
+C:\Users\pfautley\Downloads\finalproject.cydsn\finalproject.cydsn\emFile_Example01.cydsn\emFile_Example01.cyprj|74c313b9-a07a-46ea-8ef5-14bd28f0376e
+C:\Program Files\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|4b4d2671-5850-4dbb-9bdd-f30cbefee07b

@@ -1,0 +1,2611 @@
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"emFile_1_MMC_HW_SPI.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.bss
+  19              	emFile_1_isInited0:
+  20 0000 00       		.space	1
+  21              		.section	.text.emFile_1_Init,"ax",%progbits
+  22              		.align	2
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	emFile_1_Init, %function
+  26              	emFile_1_Init:
+  27              	.LFB56:
+  28              		.file 1 ".\\Generated_Source\\PSoC5\\emFile_1_MMC_HW_SPI.c"
+   1:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * File Name: emFile_1_MMC_HW_SPI.c
+   3:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Version 1.20
+   4:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+   5:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Description:
+   6:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Contains a set of File System APIs that implements SPI mode driver operation.
+   7:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+   8:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Note:
+   9:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  10:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+  11:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Copyright 2011-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  12:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * You may use this file only in accordance with the license, terms, conditions,
+  13:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  14:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * the software package with which this file was provided.
+  15:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+  16:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  17:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #include "FS.h"
+  18:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #include "emFile_1.h"
+  19:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #include "MMC_X_HW.h"
+  20:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #include "project.h"
+  21:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  22:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  23:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*********************************************************************
+  24:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *             Macros
+  25:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *********************************************************************/
+  26:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /* in mV, example means 3.3V */
+  27:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #define emFile_1_MMC_DEFAULT_SUPPLY_VOLTAGE    (3300u)
+  28:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  29:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /* Max. startup frequency (KHz) */
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 2
+
+
+  30:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #define emFile_1_STARTUP_FREQ                   (400u)
+  31:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  32:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  33:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*********************************************************************
+  34:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *       Static data
+  35:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *********************************************************************/
+  36:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  37:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** static char emFile_1_isInited0;
+  38:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  39:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+  40:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  41:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     static char emFile_1_isInited1;
+  42:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  43:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+  44:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  45:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+  46:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  47:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     static char emFile_1_isInited2;
+  48:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  49:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+  50:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  51:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #if (emFile_1_NUMBER_SD_CARDS == 4u)
+  52:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  53:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     static char emFile_1_isInited3;
+  54:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  55:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+  56:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  57:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  58:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+  59:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: emFile_1_Init
+  60:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+  61:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  62:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+  63:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Initialize SPI Masters.
+  64:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  65:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+  66:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit - Unit (SPIM) number.
+  67:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  68:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+  69:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  None
+  70:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  71:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+  72:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+  73:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+  74:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+  75:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** static void emFile_1_Init(U8 Unit) CYREENTRANT
+  76:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+  29              		.loc 1 76 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 80B5     		push	{r7, lr}
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 82B0     		sub	sp, sp, #8
+  38              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 3
+
+
+  39 0004 00AF     		add	r7, sp, #0
+  40              		.cfi_def_cfa_register 7
+  41 0006 0346     		mov	r3, r0
+  42 0008 FB71     		strb	r3, [r7, #7]
+  77:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+  43              		.loc 1 77 0
+  44 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  45 000c 002B     		cmp	r3, #0
+  46 000e 12D1     		bne	.L7
+  78:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+  79:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+  80:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  81:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         if (emFile_1_isInited0 == 0u)
+  47              		.loc 1 81 0
+  48 0010 134B     		ldr	r3, .L8
+  49 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  50 0014 002B     		cmp	r3, #0
+  51 0016 0DD1     		bne	.L4
+  82:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+  83:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Indicate that SPI 0 was initialized */
+  84:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_isInited0 = 1u;
+  52              		.loc 1 84 0
+  53 0018 114B     		ldr	r3, .L8
+  54 001a 0122     		movs	r2, #1
+  55 001c 1A70     		strb	r2, [r3]
+  85:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  86:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Initialize SPI */
+  87:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  88:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Stop the clock to set a required divider */
+  89:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Stop();
+  56              		.loc 1 89 0
+  57 001e FFF7FEFF 		bl	emFile_1_Clock_1_Stop
+  90:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  91:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Set the inital clock frequency to 400 KHz */
+  92:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_1_STARTUP_FREQ);
+  58              		.loc 1 92 0
+  59 0022 9F20     		movs	r0, #159
+  60 0024 0121     		movs	r1, #1
+  61 0026 FFF7FEFF 		bl	emFile_1_Clock_1_SetDividerRegister
+  93:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  94:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Start the clock */
+  95:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Start();
+  62              		.loc 1 95 0
+  63 002a FFF7FEFF 		bl	emFile_1_Clock_1_Start
+  96:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+  97:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Start SPI 0 */
+  98:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI0_Start();
+  64              		.loc 1 98 0
+  65 002e FFF7FEFF 		bl	emFile_1_SPI0_Start
+  99:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 100:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 101:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+  66              		.loc 1 101 0
+  67 0032 12E0     		b	.L1
+  68              	.L4:
+  69 0034 11E0     		b	.L1
+  70              	.L7:
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 4
+
+
+ 102:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 103:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 104:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 105:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 1u:
+ 106:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 107:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 if (emFile_1_isInited1 == 0u)
+ 108:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 {
+ 109:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Indicate that SPI 1 was initialized */
+ 110:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_isInited1 = 1u;
+ 111:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 112:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Stop the clock to set a required divider */
+ 113:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_2_Stop();
+ 114:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 115:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Set the inital clock frequency to 400 KHz */
+ 116:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_2_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_1_STARTUP_FREQ);
+ 117:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 118:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start the clock */
+ 119:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_2_Start();
+ 120:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 121:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start SPI 1 */
+ 122:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_SPI1_Start();
+ 123:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 }
+ 124:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 125:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 126:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 127:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 128:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 129:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 130:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 131:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 2u:
+ 132:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 133:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 if (emFile_1_isInited2 == 0u)
+ 134:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 {
+ 135:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Indicate that SPI 2 was initialized */
+ 136:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_isInited2 = 1u;
+ 137:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 138:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Stop the clock to set a required divider */
+ 139:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_3_Stop();
+ 140:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 141:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Set the inital clock frequency to 400 KHz */
+ 142:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_3_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_1_STARTUP_FREQ);
+ 143:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 144:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start the clock */
+ 145:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_3_Start();
+ 146:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 147:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start SPI 2 */
+ 148:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_SPI2_Start();
+ 149:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 }
+ 150:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 151:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 152:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 153:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+ 154:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 155:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS == 4u)
+ 156:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 157:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 3u:
+ 158:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 5
+
+
+ 159:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 if (emFile_1_isInited3 == 0u)
+ 160:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 {
+ 161:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Indicate that SPI 3 was initialized */
+ 162:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_isInited3 = 1u;
+ 163:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 164:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Stop the clock to set a required divider */
+ 165:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_4_Stop();
+ 166:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 167:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Set the inital clock frequency to 400 KHz */
+ 168:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_4_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_1_STARTUP_FREQ);
+ 169:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 170:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start the clock */
+ 171:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_Clock_4_Start();
+ 172:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 173:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     /* Start SPI 3 */
+ 174:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                     emFile_1_SPI3_Start();
+ 175:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 }
+ 176:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 177:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 178:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 179:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+ 180:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 181:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 182:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 183:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         if (emFile_1_isInited0 == 0u)
+  71              		.loc 1 183 0
+  72 0036 0A4B     		ldr	r3, .L8
+  73 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  74 003a 002B     		cmp	r3, #0
+  75 003c 0CD1     		bne	.L6
+ 184:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 185:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Indicate that SPI 0 was initialized */
+ 186:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_isInited0 = 1u;
+  76              		.loc 1 186 0
+  77 003e 084B     		ldr	r3, .L8
+  78 0040 0122     		movs	r2, #1
+  79 0042 1A70     		strb	r2, [r3]
+ 187:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 188:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Stop the clock to set a required divider */
+ 189:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Stop();
+  80              		.loc 1 189 0
+  81 0044 FFF7FEFF 		bl	emFile_1_Clock_1_Stop
+ 190:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 191:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Set the inital clock frequency to 400 KHz */
+ 192:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_SetDividerValue(BCLK__BUS_CLK__KHZ/emFile_1_STARTUP_FREQ);
+  82              		.loc 1 192 0
+  83 0048 9F20     		movs	r0, #159
+  84 004a 0121     		movs	r1, #1
+  85 004c FFF7FEFF 		bl	emFile_1_Clock_1_SetDividerRegister
+ 193:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 194:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Start the clock */
+ 195:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Start();
+  86              		.loc 1 195 0
+  87 0050 FFF7FEFF 		bl	emFile_1_Clock_1_Start
+ 196:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 197:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Start SPI 0 */
+ 198:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI0_Start();
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 6
+
+
+  88              		.loc 1 198 0
+  89 0054 FFF7FEFF 		bl	emFile_1_SPI0_Start
+  90              	.L6:
+ 199:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 200:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+ 201:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+  91              		.loc 1 201 0
+  92 0058 00BF     		nop
+  93              	.L1:
+ 202:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****       }
+ 203:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+  94              		.loc 1 203 0
+  95 005a 0837     		adds	r7, r7, #8
+  96 005c BD46     		mov	sp, r7
+  97              		@ sp needed
+  98 005e 80BD     		pop	{r7, pc}
+  99              	.L9:
+ 100              		.align	2
+ 101              	.L8:
+ 102 0060 00000000 		.word	emFile_1_isInited0
+ 103              		.cfi_endproc
+ 104              	.LFE56:
+ 105              		.size	emFile_1_Init, .-emFile_1_Init
+ 106              		.section	.text.emFile_1_ReadWriteSPI,"ax",%progbits
+ 107              		.align	2
+ 108              		.thumb
+ 109              		.thumb_func
+ 110              		.type	emFile_1_ReadWriteSPI, %function
+ 111              	emFile_1_ReadWriteSPI:
+ 112              	.LFB57:
+ 204:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 205:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 206:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 207:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: emFile_1_ReadWriteSPI
+ 208:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 209:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 210:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 211:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Reads and Writes data via SPI.
+ 212:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 213:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 214:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit - Unit number;
+ 215:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Data - data to be written.
+ 216:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 217:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 218:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Data received from SD card.
+ 219:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 220:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 221:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 222:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 223:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 224:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** static U8 emFile_1_ReadWriteSPI(U8 Unit, U8 Data) CYREENTRANT
+ 225:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 113              		.loc 1 225 0
+ 114              		.cfi_startproc
+ 115              		@ args = 0, pretend = 0, frame = 16
+ 116              		@ frame_needed = 1, uses_anonymous_args = 0
+ 117 0000 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 7
+
+
+ 118              		.cfi_def_cfa_offset 8
+ 119              		.cfi_offset 7, -8
+ 120              		.cfi_offset 14, -4
+ 121 0002 84B0     		sub	sp, sp, #16
+ 122              		.cfi_def_cfa_offset 24
+ 123 0004 00AF     		add	r7, sp, #0
+ 124              		.cfi_def_cfa_register 7
+ 125 0006 0246     		mov	r2, r0
+ 126 0008 0B46     		mov	r3, r1
+ 127 000a FA71     		strb	r2, [r7, #7]
+ 128 000c BB71     		strb	r3, [r7, #6]
+ 226:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     U8 spiData;
+ 227:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 228:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 129              		.loc 1 228 0
+ 130 000e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 131 0010 002B     		cmp	r3, #0
+ 132 0012 11D1     		bne	.L17
+ 229:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 230:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+ 231:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 232:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Send Data */
+ 233:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         emFile_1_SPI0_WriteTxData(Data);
+ 133              		.loc 1 233 0
+ 134 0014 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 135 0016 1846     		mov	r0, r3
+ 136 0018 FFF7FEFF 		bl	emFile_1_SPI0_WriteTxData
+ 234:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 235:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Wait until all bits are shifted */
+ 236:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         while (0u == (emFile_1_SPI0_STS_SPI_DONE & emFile_1_SPI0_ReadTxStatus()));
+ 137              		.loc 1 236 0
+ 138 001c 00BF     		nop
+ 139              	.L13:
+ 140              		.loc 1 236 0 is_stmt 0 discriminator 1
+ 141 001e FFF7FEFF 		bl	emFile_1_SPI0_ReadTxStatus
+ 142 0022 0346     		mov	r3, r0
+ 143 0024 03F00103 		and	r3, r3, #1
+ 144 0028 DBB2     		uxtb	r3, r3
+ 145 002a 002B     		cmp	r3, #0
+ 146 002c F7D0     		beq	.L13
+ 237:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 238:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Read data */
+ 239:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         spiData = emFile_1_SPI0_ReadRxData();
+ 147              		.loc 1 239 0 is_stmt 1
+ 148 002e FFF7FEFF 		bl	emFile_1_SPI0_ReadRxData
+ 149 0032 0346     		mov	r3, r0
+ 150 0034 FB73     		strb	r3, [r7, #15]
+ 240:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 241:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 151              		.loc 1 241 0
+ 152 0036 11E0     		b	.L14
+ 153              	.L17:
+ 242:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 243:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 244:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 245:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 1u:
+ 246:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 8
+
+
+ 247:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Send Data */
+ 248:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI1_WriteTxData(Data);
+ 249:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 250:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Wait until all bits are shifted */
+ 251:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             while (0u == (emFile_1_SPI1_STS_SPI_DONE & emFile_1_SPI1_ReadTxStatus()));
+ 252:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 253:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Read data */
+ 254:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             spiData = emFile_1_SPI1_ReadRxData();
+ 255:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 256:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 257:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 258:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 259:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 260:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 261:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 262:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 2u:
+ 263:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 264:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Send Data */
+ 265:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI2_WriteTxData(Data);
+ 266:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 267:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Wait until all bits are shifted */
+ 268:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             while (0u == (emFile_1_SPI2_STS_SPI_DONE & emFile_1_SPI2_ReadTxStatus()));
+ 269:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 270:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Read data */
+ 271:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             spiData = emFile_1_SPI2_ReadRxData();
+ 272:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 273:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 274:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 275:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 276:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 277:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 4u)
+ 278:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 279:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 3u:
+ 280:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 281:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Send Data */
+ 282:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI3_WriteTxData(Data);
+ 283:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 284:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Wait until all bits are shifted */
+ 285:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             while (0u == (emFile_1_SPI3_STS_SPI_DONE & emFile_1_SPI3_ReadTxStatus()));
+ 286:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 287:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Read data */
+ 288:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             spiData = emFile_1_SPI3_ReadRxData();
+ 289:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 290:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 291:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 292:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 4u) */
+ 293:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 294:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 295:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 296:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Send Data */
+ 297:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         emFile_1_SPI0_WriteTxData(Data);
+ 154              		.loc 1 297 0
+ 155 0038 BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+ 156 003a 1846     		mov	r0, r3
+ 157 003c FFF7FEFF 		bl	emFile_1_SPI0_WriteTxData
+ 298:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 299:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Wait until all bits are shifted */
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 9
+
+
+ 300:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         while (0u == (emFile_1_SPI0_STS_SPI_DONE & emFile_1_SPI0_ReadTxStatus()));
+ 158              		.loc 1 300 0
+ 159 0040 00BF     		nop
+ 160              	.L15:
+ 161              		.loc 1 300 0 is_stmt 0 discriminator 1
+ 162 0042 FFF7FEFF 		bl	emFile_1_SPI0_ReadTxStatus
+ 163 0046 0346     		mov	r3, r0
+ 164 0048 03F00103 		and	r3, r3, #1
+ 165 004c DBB2     		uxtb	r3, r3
+ 166 004e 002B     		cmp	r3, #0
+ 167 0050 F7D0     		beq	.L15
+ 301:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 302:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Read data */
+ 303:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         spiData = emFile_1_SPI0_ReadRxData();
+ 168              		.loc 1 303 0 is_stmt 1
+ 169 0052 FFF7FEFF 		bl	emFile_1_SPI0_ReadRxData
+ 170 0056 0346     		mov	r3, r0
+ 171 0058 FB73     		strb	r3, [r7, #15]
+ 304:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+ 305:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 172              		.loc 1 305 0
+ 173 005a 00BF     		nop
+ 174              	.L14:
+ 306:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 307:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 308:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     return(spiData);
+ 175              		.loc 1 308 0
+ 176 005c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 309:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 177              		.loc 1 309 0
+ 178 005e 1846     		mov	r0, r3
+ 179 0060 1037     		adds	r7, r7, #16
+ 180 0062 BD46     		mov	sp, r7
+ 181              		@ sp needed
+ 182 0064 80BD     		pop	{r7, pc}
+ 183              		.cfi_endproc
+ 184              	.LFE57:
+ 185              		.size	emFile_1_ReadWriteSPI, .-emFile_1_ReadWriteSPI
+ 186 0066 00BF     		.section	.text.FS_MMC_HW_X_EnableCS,"ax",%progbits
+ 187              		.align	2
+ 188              		.global	FS_MMC_HW_X_EnableCS
+ 189              		.thumb
+ 190              		.thumb_func
+ 191              		.type	FS_MMC_HW_X_EnableCS, %function
+ 192              	FS_MMC_HW_X_EnableCS:
+ 193              	.LFB58:
+ 310:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 311:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 312:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_EnableCS
+ 313:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 314:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 315:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 316:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Sets the card slot active using the
+ 317:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  chip select (CS) line.
+ 318:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 319:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 320:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit      - Device Index.
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 10
+
+
+ 321:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 322:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 323:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  None
+ 324:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 325:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 326:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 327:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 328:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 329:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** void FS_MMC_HW_X_EnableCS(U8 Unit)
+ 330:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 194              		.loc 1 330 0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 8
+ 197              		@ frame_needed = 1, uses_anonymous_args = 0
+ 198 0000 80B5     		push	{r7, lr}
+ 199              		.cfi_def_cfa_offset 8
+ 200              		.cfi_offset 7, -8
+ 201              		.cfi_offset 14, -4
+ 202 0002 82B0     		sub	sp, sp, #8
+ 203              		.cfi_def_cfa_offset 16
+ 204 0004 00AF     		add	r7, sp, #0
+ 205              		.cfi_def_cfa_register 7
+ 206 0006 0346     		mov	r3, r0
+ 207 0008 FB71     		strb	r3, [r7, #7]
+ 331:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 208              		.loc 1 331 0
+ 209 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 210 000c 002B     		cmp	r3, #0
+ 211 000e 03D1     		bne	.L22
+ 332:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 333:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 0u:
+ 334:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 335:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Set CS to 0 */
+ 336:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI0_CS_Write(0u);
+ 212              		.loc 1 336 0
+ 213 0010 0020     		movs	r0, #0
+ 214 0012 FFF7FEFF 		bl	emFile_1_SPI0_CS_Write
+ 337:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 338:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 215              		.loc 1 338 0
+ 216 0016 03E0     		b	.L18
+ 217              	.L22:
+ 339:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 340:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 341:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 342:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 1u:
+ 343:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 344:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 /* Set CS to 0 */
+ 345:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 emFile_1_SPI1_CS_Write(0u);
+ 346:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 347:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 348:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 349:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 350:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 351:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 352:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 353:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 2u:
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 11
+
+
+ 354:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 355:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 /* Set CS to 0 */
+ 356:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 emFile_1_SPI2_CS_Write(0u);
+ 357:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 358:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 359:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 360:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+ 361:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 362:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS == 4u)
+ 363:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 364:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             case 3u:
+ 365:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 366:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 /* Set CS to 0 */
+ 367:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 emFile_1_SPI3_CS_Write(0u);
+ 368:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 369:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 break;
+ 370:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 371:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+ 372:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 373:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         default:
+ 374:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 375:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI0_CS_Write(0u);
+ 218              		.loc 1 375 0
+ 219 0018 0020     		movs	r0, #0
+ 220 001a FFF7FEFF 		bl	emFile_1_SPI0_CS_Write
+ 376:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 377:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 221              		.loc 1 377 0
+ 222 001e 00BF     		nop
+ 223              	.L18:
+ 378:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 379:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 224              		.loc 1 379 0
+ 225 0020 0837     		adds	r7, r7, #8
+ 226 0022 BD46     		mov	sp, r7
+ 227              		@ sp needed
+ 228 0024 80BD     		pop	{r7, pc}
+ 229              		.cfi_endproc
+ 230              	.LFE58:
+ 231              		.size	FS_MMC_HW_X_EnableCS, .-FS_MMC_HW_X_EnableCS
+ 232 0026 00BF     		.section	.text.FS_MMC_HW_X_DisableCS,"ax",%progbits
+ 233              		.align	2
+ 234              		.global	FS_MMC_HW_X_DisableCS
+ 235              		.thumb
+ 236              		.thumb_func
+ 237              		.type	FS_MMC_HW_X_DisableCS, %function
+ 238              	FS_MMC_HW_X_DisableCS:
+ 239              	.LFB59:
+ 380:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 381:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 382:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 383:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_DisableCS
+ 384:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 385:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 386:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 387:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Clears the card slot inactive using the
+ 388:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  chip select (CS) line.
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 12
+
+
+ 389:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 390:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 391:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit      - Device Index.
+ 392:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 393:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 394:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  None
+ 395:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 396:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 397:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 398:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 399:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 400:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** void FS_MMC_HW_X_DisableCS(U8 Unit)
+ 401:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 240              		.loc 1 401 0
+ 241              		.cfi_startproc
+ 242              		@ args = 0, pretend = 0, frame = 8
+ 243              		@ frame_needed = 1, uses_anonymous_args = 0
+ 244 0000 80B5     		push	{r7, lr}
+ 245              		.cfi_def_cfa_offset 8
+ 246              		.cfi_offset 7, -8
+ 247              		.cfi_offset 14, -4
+ 248 0002 82B0     		sub	sp, sp, #8
+ 249              		.cfi_def_cfa_offset 16
+ 250 0004 00AF     		add	r7, sp, #0
+ 251              		.cfi_def_cfa_register 7
+ 252 0006 0346     		mov	r3, r0
+ 253 0008 FB71     		strb	r3, [r7, #7]
+ 402:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 254              		.loc 1 402 0
+ 255 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 256 000c 002B     		cmp	r3, #0
+ 257 000e 03D1     		bne	.L27
+ 403:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 404:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+ 405:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 406:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         emFile_1_SPI0_CS_Write(1u);
+ 258              		.loc 1 406 0
+ 259 0010 0120     		movs	r0, #1
+ 260 0012 FFF7FEFF 		bl	emFile_1_SPI0_CS_Write
+ 407:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 408:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 261              		.loc 1 408 0
+ 262 0016 03E0     		b	.L23
+ 263              	.L27:
+ 409:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 410:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 411:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 412:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 1u:
+ 413:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 414:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI1_CS_Write(1u);
+ 415:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 416:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 417:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 418:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 419:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 420:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 421:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 13
+
+
+ 422:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 2u:
+ 423:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 424:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI2_CS_Write(1u);
+ 425:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 426:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 427:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 428:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+ 429:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 430:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS == 4u)
+ 431:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 432:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 3u:
+ 433:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 434:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_SPI3_CS_Write(1u);
+ 435:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 436:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 437:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 438:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+ 439:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 440:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 441:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 442:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         emFile_1_SPI0_CS_Write(1u);
+ 264              		.loc 1 442 0
+ 265 0018 0120     		movs	r0, #1
+ 266 001a FFF7FEFF 		bl	emFile_1_SPI0_CS_Write
+ 443:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+ 444:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 267              		.loc 1 444 0
+ 268 001e 00BF     		nop
+ 269              	.L23:
+ 445:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 446:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 270              		.loc 1 446 0
+ 271 0020 0837     		adds	r7, r7, #8
+ 272 0022 BD46     		mov	sp, r7
+ 273              		@ sp needed
+ 274 0024 80BD     		pop	{r7, pc}
+ 275              		.cfi_endproc
+ 276              	.LFE59:
+ 277              		.size	FS_MMC_HW_X_DisableCS, .-FS_MMC_HW_X_DisableCS
+ 278 0026 00BF     		.section	.text.FS_MMC_HW_X_IsWriteProtected,"ax",%progbits
+ 279              		.align	2
+ 280              		.global	FS_MMC_HW_X_IsWriteProtected
+ 281              		.thumb
+ 282              		.thumb_func
+ 283              		.type	FS_MMC_HW_X_IsWriteProtected, %function
+ 284              	FS_MMC_HW_X_IsWriteProtected:
+ 285              	.LFB60:
+ 447:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 448:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 449:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 450:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_IsWriteProtected
+ 451:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 452:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 453:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 454:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Returns the state of the physical write
+ 455:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  protection of the SD cards.
+ 456:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 14
+
+
+ 457:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 458:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit      - Device Index.
+ 459:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 460:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 461:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    1       - the card is write protected;
+ 462:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    0       - the card is not write protected.
+ 463:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 464:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 465:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 466:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 467:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 468:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** int FS_MMC_HW_X_IsWriteProtected(U8 Unit)
+ 469:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 286              		.loc 1 469 0
+ 287              		.cfi_startproc
+ 288              		@ args = 0, pretend = 0, frame = 16
+ 289              		@ frame_needed = 1, uses_anonymous_args = 0
+ 290              		@ link register save eliminated.
+ 291 0000 80B4     		push	{r7}
+ 292              		.cfi_def_cfa_offset 4
+ 293              		.cfi_offset 7, -4
+ 294 0002 85B0     		sub	sp, sp, #20
+ 295              		.cfi_def_cfa_offset 24
+ 296 0004 00AF     		add	r7, sp, #0
+ 297              		.cfi_def_cfa_register 7
+ 298 0006 0346     		mov	r3, r0
+ 299 0008 FB71     		strb	r3, [r7, #7]
+ 470:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****    int wpState;
+ 471:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 472:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 300              		.loc 1 472 0
+ 301 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 302 000c 002B     		cmp	r3, #0
+ 303 000e 02D1     		bne	.L33
+ 473:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 474:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+ 475:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 476:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_WP0_EN)
+ 477:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 478:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             /* Based on physical switch state */
+ 479:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****               wpState = (int)emFile_1_SPI0_WP_Read();
+ 480:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 481:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #else
+ 482:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 483:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             wpState = 0;
+ 304              		.loc 1 483 0
+ 305 0010 0023     		movs	r3, #0
+ 306 0012 FB60     		str	r3, [r7, #12]
+ 484:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 485:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_WP0_EN) */
+ 486:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 487:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 307              		.loc 1 487 0
+ 308 0014 02E0     		b	.L31
+ 309              	.L33:
+ 488:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 489:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 15
+
+
+ 490:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 491:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 1u:
+ 492:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 493:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #if (emFile_1_WP1_EN)
+ 494:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 495:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                    /* Based on physical switch state */
+ 496:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = (int)emFile_1_SPI1_WP_Read();
+ 497:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 498:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #else
+ 499:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 500:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = 0;
+ 501:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 502:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #endif /* (emFile_1_WP1_EN) */
+ 503:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 504:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 505:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 506:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 507:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 508:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 509:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 510:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 2u:
+ 511:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 512:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #if (emFile_1_WP2_EN)
+ 513:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 514:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                   /* Based on physical switch state */
+ 515:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = (int)emFile_1_SPI2_WP_Read();
+ 516:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 517:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #else
+ 518:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 519:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = 0;
+ 520:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 521:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #endif /* (emFile_1_WP2_EN) */
+ 522:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 523:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 524:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 525:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+ 526:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 527:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #if (emFile_1_NUMBER_SD_CARDS == 4u)
+ 528:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 529:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 3u:
+ 530:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 531:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #if (emFile_1_WP3_EN)
+ 532:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 533:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 /* Based on physical switch state */
+ 534:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = (int)emFile_1_SPI3_WP_Read();
+ 535:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 536:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #else
+ 537:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 538:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****                 wpState = 0;
+ 539:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 540:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             #endif /* (emFile_1_WP3_EN) */
+ 541:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 542:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 543:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 544:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+ 545:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 546:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 16
+
+
+ 547:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 548:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_WP0_EN)
+ 549:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 550:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****               /* Based on physical switch state */
+ 551:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             wpState = (int)emFile_1_SPI0_WP_Read();
+ 552:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 553:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #else
+ 554:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 555:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             wpState = 0;
+ 310              		.loc 1 555 0
+ 311 0016 0023     		movs	r3, #0
+ 312 0018 FB60     		str	r3, [r7, #12]
+ 556:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 557:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_WP0_EN) */
+ 558:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+ 559:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 313              		.loc 1 559 0
+ 314 001a 00BF     		nop
+ 315              	.L31:
+ 560:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 561:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 562:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     return(wpState);
+ 316              		.loc 1 562 0
+ 317 001c FB68     		ldr	r3, [r7, #12]
+ 563:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 318              		.loc 1 563 0
+ 319 001e 1846     		mov	r0, r3
+ 320 0020 1437     		adds	r7, r7, #20
+ 321 0022 BD46     		mov	sp, r7
+ 322              		@ sp needed
+ 323 0024 5DF8047B 		ldr	r7, [sp], #4
+ 324 0028 7047     		bx	lr
+ 325              		.cfi_endproc
+ 326              	.LFE60:
+ 327              		.size	FS_MMC_HW_X_IsWriteProtected, .-FS_MMC_HW_X_IsWriteProtected
+ 328 002a 00BF     		.section	.text.FS_MMC_HW_X_SetMaxSpeed,"ax",%progbits
+ 329              		.align	2
+ 330              		.global	FS_MMC_HW_X_SetMaxSpeed
+ 331              		.thumb
+ 332              		.thumb_func
+ 333              		.type	FS_MMC_HW_X_SetMaxSpeed, %function
+ 334              	FS_MMC_HW_X_SetMaxSpeed:
+ 335              	.LFB61:
+ 564:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 565:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 566:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 567:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_SetMaxSpeed
+ 568:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 569:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 570:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 571:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Sets the SPI interface to a maximum frequency.
+ 572:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Make sure that you set the frequency lower or equal but never higher
+ 573:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  than the given value. Recommended startup frequency is 100kHz - 400kHz.
+ 574:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 575:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 576:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit             - Device Index;
+ 577:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  MaxFreq          - SPI clock frequency in kHz.
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 17
+
+
+ 578:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 579:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 580:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  max. frequency   - the maximum frequency set in kHz;
+ 581:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  0                - the frequency could not be set.
+ 582:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 583:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 584:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 585:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 586:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 587:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** U16 FS_MMC_HW_X_SetMaxSpeed(U8 Unit, U16 MaxFreq)
+ 588:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 336              		.loc 1 588 0
+ 337              		.cfi_startproc
+ 338              		@ args = 0, pretend = 0, frame = 16
+ 339              		@ frame_needed = 1, uses_anonymous_args = 0
+ 340 0000 80B5     		push	{r7, lr}
+ 341              		.cfi_def_cfa_offset 8
+ 342              		.cfi_offset 7, -8
+ 343              		.cfi_offset 14, -4
+ 344 0002 84B0     		sub	sp, sp, #16
+ 345              		.cfi_def_cfa_offset 24
+ 346 0004 00AF     		add	r7, sp, #0
+ 347              		.cfi_def_cfa_register 7
+ 348 0006 0246     		mov	r2, r0
+ 349 0008 0B46     		mov	r3, r1
+ 350 000a FA71     		strb	r2, [r7, #7]
+ 351 000c BB80     		strh	r3, [r7, #4]	@ movhi
+ 589:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     U16 freq;
+ 590:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     U32 divResult;
+ 591:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 592:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     if(MaxFreq < emFile_1_STARTUP_FREQ)
+ 352              		.loc 1 592 0
+ 353 000e BB88     		ldrh	r3, [r7, #4]
+ 354 0010 B3F5C87F 		cmp	r3, #400
+ 355 0014 03D2     		bcs	.L35
+ 593:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 594:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         MaxFreq = emFile_1_STARTUP_FREQ;
+ 356              		.loc 1 594 0
+ 357 0016 4FF4C873 		mov	r3, #400
+ 358 001a BB80     		strh	r3, [r7, #4]	@ movhi
+ 359 001c 06E0     		b	.L36
+ 360              	.L35:
+ 595:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 596:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     else if(MaxFreq > emFile_1_MAX_SPI_FREQ)
+ 361              		.loc 1 596 0
+ 362 001e BB88     		ldrh	r3, [r7, #4]
+ 363 0020 B3F57A6F 		cmp	r3, #4000
+ 364 0024 02D9     		bls	.L36
+ 597:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 598:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         MaxFreq = emFile_1_MAX_SPI_FREQ;
+ 365              		.loc 1 598 0
+ 366 0026 4FF47A63 		mov	r3, #4000
+ 367 002a BB80     		strh	r3, [r7, #4]	@ movhi
+ 368              	.L36:
+ 599:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 600:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     else
+ 601:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 18
+
+
+ 602:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         /* Do nothing */
+ 603:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 604:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 605:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     freq = MaxFreq << 1u;
+ 369              		.loc 1 605 0
+ 370 002c BB88     		ldrh	r3, [r7, #4]	@ movhi
+ 371 002e 5B00     		lsls	r3, r3, #1
+ 372 0030 FB81     		strh	r3, [r7, #14]	@ movhi
+ 606:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 607:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     divResult = ((U32) BCLK__BUS_CLK__KHZ)/((U32) freq);
+ 373              		.loc 1 607 0
+ 374 0032 FB89     		ldrh	r3, [r7, #14]
+ 375 0034 4FF47A42 		mov	r2, #64000
+ 376 0038 B2FBF3F3 		udiv	r3, r2, r3
+ 377 003c 9BB2     		uxth	r3, r3
+ 378 003e BB60     		str	r3, [r7, #8]
+ 608:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 609:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 379              		.loc 1 609 0
+ 380 0040 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 381 0042 002B     		cmp	r3, #0
+ 382 0044 0CD1     		bne	.L41
+ 610:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 611:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 0u:
+ 612:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Stop();
+ 383              		.loc 1 612 0
+ 384 0046 FFF7FEFF 		bl	emFile_1_Clock_1_Stop
+ 613:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_SetDividerValue((U16)divResult);    /* update the frequency */
+ 385              		.loc 1 613 0
+ 386 004a BB68     		ldr	r3, [r7, #8]
+ 387 004c 9BB2     		uxth	r3, r3
+ 388 004e 013B     		subs	r3, r3, #1
+ 389 0050 9BB2     		uxth	r3, r3
+ 390 0052 1846     		mov	r0, r3
+ 391 0054 0121     		movs	r1, #1
+ 392 0056 FFF7FEFF 		bl	emFile_1_Clock_1_SetDividerRegister
+ 614:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Start();
+ 393              		.loc 1 614 0
+ 394 005a FFF7FEFF 		bl	emFile_1_Clock_1_Start
+ 615:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 395              		.loc 1 615 0
+ 396 005e 0CE0     		b	.L39
+ 397              	.L41:
+ 616:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 617:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 2u)
+ 618:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 619:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 1u:
+ 620:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 621:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_2_Stop();
+ 622:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_2_SetDividerValue((U16)divResult);    /* update the frequency */
+ 623:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_2_Start();
+ 624:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 625:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 626:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 2u) */
+ 627:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 628:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS >= 3u)
+ 629:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 19
+
+
+ 630:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 2u:
+ 631:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 632:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_3_Stop();
+ 633:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_3_SetDividerValue((U16)divResult);    /* update the frequency */
+ 634:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_3_Start();
+ 635:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 636:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 637:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS >= 3u) */
+ 638:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 639:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #if (emFile_1_NUMBER_SD_CARDS == 4u)
+ 640:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 641:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         case 3u:
+ 642:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 643:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_4_Stop();
+ 644:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_4_SetDividerValue((U16)divResult);    /* update the frequency */
+ 645:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_4_Start();
+ 646:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 647:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 648:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         #endif /* (emFile_1_NUMBER_SD_CARDS == 4u) */
+ 649:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 650:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         default:
+ 651:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Stop();
+ 398              		.loc 1 651 0
+ 399 0060 FFF7FEFF 		bl	emFile_1_Clock_1_Stop
+ 652:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_SetDividerValue((U16)divResult);    /* update the frequency */
+ 400              		.loc 1 652 0
+ 401 0064 BB68     		ldr	r3, [r7, #8]
+ 402 0066 9BB2     		uxth	r3, r3
+ 403 0068 013B     		subs	r3, r3, #1
+ 404 006a 9BB2     		uxth	r3, r3
+ 405 006c 1846     		mov	r0, r3
+ 406 006e 0121     		movs	r1, #1
+ 407 0070 FFF7FEFF 		bl	emFile_1_Clock_1_SetDividerRegister
+ 653:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_Clock_1_Start();
+ 408              		.loc 1 653 0
+ 409 0074 FFF7FEFF 		bl	emFile_1_Clock_1_Start
+ 654:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             break;
+ 410              		.loc 1 654 0
+ 411 0078 00BF     		nop
+ 412              	.L39:
+ 655:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 656:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 657:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     return (MaxFreq);
+ 413              		.loc 1 657 0
+ 414 007a BB88     		ldrh	r3, [r7, #4]
+ 658:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 659:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 415              		.loc 1 659 0
+ 416 007c 1846     		mov	r0, r3
+ 417 007e 1037     		adds	r7, r7, #16
+ 418 0080 BD46     		mov	sp, r7
+ 419              		@ sp needed
+ 420 0082 80BD     		pop	{r7, pc}
+ 421              		.cfi_endproc
+ 422              	.LFE61:
+ 423              		.size	FS_MMC_HW_X_SetMaxSpeed, .-FS_MMC_HW_X_SetMaxSpeed
+ 424              		.section	.text.FS_MMC_HW_X_SetVoltage,"ax",%progbits
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 20
+
+
+ 425              		.align	2
+ 426              		.global	FS_MMC_HW_X_SetVoltage
+ 427              		.thumb
+ 428              		.thumb_func
+ 429              		.type	FS_MMC_HW_X_SetVoltage, %function
+ 430              	FS_MMC_HW_X_SetVoltage:
+ 431              	.LFB62:
+ 660:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 661:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 662:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 663:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_SetVoltage
+ 664:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 665:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 666:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 667:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Be sure that your card slot si within the given
+ 668:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  voltage range. Return 1 if your slot can support the required voltage,
+ 669:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  and if not, return 0.
+ 670:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 671:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 672:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit             - Device Index;
+ 673:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Vmin             - Minimum supply voltage in mV;
+ 674:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Vmin             - Maximum supply voltage in mV.
+ 675:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 676:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 677:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  1                - the card slot supports the voltage range;
+ 678:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  0                - the card slot does not support the voltage range.
+ 679:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 680:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 681:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 682:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 683:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 684:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** int FS_MMC_HW_X_SetVoltage(U8 Unit, U16 Vmin, U16 Vmax)
+ 685:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 432              		.loc 1 685 0
+ 433              		.cfi_startproc
+ 434              		@ args = 0, pretend = 0, frame = 16
+ 435              		@ frame_needed = 1, uses_anonymous_args = 0
+ 436              		@ link register save eliminated.
+ 437 0000 80B4     		push	{r7}
+ 438              		.cfi_def_cfa_offset 4
+ 439              		.cfi_offset 7, -4
+ 440 0002 85B0     		sub	sp, sp, #20
+ 441              		.cfi_def_cfa_offset 24
+ 442 0004 00AF     		add	r7, sp, #0
+ 443              		.cfi_def_cfa_register 7
+ 444 0006 1346     		mov	r3, r2
+ 445 0008 0246     		mov	r2, r0
+ 446 000a FA71     		strb	r2, [r7, #7]
+ 447 000c 0A46     		mov	r2, r1	@ movhi
+ 448 000e BA80     		strh	r2, [r7, #4]	@ movhi
+ 449 0010 7B80     		strh	r3, [r7, #2]	@ movhi
+ 686:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     int result;
+ 687:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 688:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 450              		.loc 1 688 0
+ 451 0012 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 452 0014 0033     		adds	r3, r3, #0
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 21
+
+
+ 453 0016 032B     		cmp	r3, #3
+ 454 0018 0FD8     		bhi	.L43
+ 689:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 690:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+ 691:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 692:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 1u:
+ 693:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 694:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 2u:
+ 695:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 696:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 3u:
+ 697:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 698:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         if((Vmin <= emFile_1_MMC_DEFAULT_SUPPLY_VOLTAGE) &&
+ 455              		.loc 1 698 0
+ 456 001a BA88     		ldrh	r2, [r7, #4]
+ 457 001c 40F6E443 		movw	r3, #3300
+ 458 0020 9A42     		cmp	r2, r3
+ 459 0022 07D8     		bhi	.L45
+ 460              		.loc 1 698 0 is_stmt 0 discriminator 1
+ 461 0024 7A88     		ldrh	r2, [r7, #2]
+ 462 0026 40F6E343 		movw	r3, #3299
+ 463 002a 9A42     		cmp	r2, r3
+ 464 002c 02D9     		bls	.L45
+ 699:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             (emFile_1_MMC_DEFAULT_SUPPLY_VOLTAGE <= Vmax))
+ 700:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 701:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             result = emFile_1_RET_SUCCCESS;
+ 465              		.loc 1 701 0 is_stmt 1
+ 466 002e 0123     		movs	r3, #1
+ 467 0030 FB60     		str	r3, [r7, #12]
+ 702:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 703:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         else
+ 704:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 705:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             result = emFile_1_RET_FAIL;
+ 706:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 707:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 708:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 468              		.loc 1 708 0
+ 469 0032 12E0     		b	.L47
+ 470              	.L45:
+ 705:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             result = emFile_1_RET_FAIL;
+ 471              		.loc 1 705 0
+ 472 0034 0023     		movs	r3, #0
+ 473 0036 FB60     		str	r3, [r7, #12]
+ 474              		.loc 1 708 0
+ 475 0038 0FE0     		b	.L47
+ 476              	.L43:
+ 709:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 710:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 711:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 712:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         if((Vmin <= emFile_1_MMC_DEFAULT_SUPPLY_VOLTAGE) &&
+ 477              		.loc 1 712 0
+ 478 003a BA88     		ldrh	r2, [r7, #4]
+ 479 003c 40F6E443 		movw	r3, #3300
+ 480 0040 9A42     		cmp	r2, r3
+ 481 0042 07D8     		bhi	.L48
+ 482              		.loc 1 712 0 is_stmt 0 discriminator 1
+ 483 0044 7A88     		ldrh	r2, [r7, #2]
+ 484 0046 40F6E343 		movw	r3, #3299
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 22
+
+
+ 485 004a 9A42     		cmp	r2, r3
+ 486 004c 02D9     		bls	.L48
+ 713:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             (emFile_1_MMC_DEFAULT_SUPPLY_VOLTAGE <= Vmax))
+ 714:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 715:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             result = emFile_1_RET_SUCCCESS;
+ 487              		.loc 1 715 0 is_stmt 1
+ 488 004e 0123     		movs	r3, #1
+ 489 0050 FB60     		str	r3, [r7, #12]
+ 716:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 717:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         else
+ 718:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 719:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             result = emFile_1_RET_FAIL;
+ 720:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         }
+ 721:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         
+ 722:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 490              		.loc 1 722 0
+ 491 0052 01E0     		b	.L51
+ 492              	.L48:
+ 719:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             result = emFile_1_RET_FAIL;
+ 493              		.loc 1 719 0
+ 494 0054 0023     		movs	r3, #0
+ 495 0056 FB60     		str	r3, [r7, #12]
+ 496              	.L51:
+ 497              		.loc 1 722 0
+ 498 0058 00BF     		nop
+ 499              	.L47:
+ 723:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 724:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 725:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     return(result);
+ 500              		.loc 1 725 0
+ 501 005a FB68     		ldr	r3, [r7, #12]
+ 726:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 502              		.loc 1 726 0
+ 503 005c 1846     		mov	r0, r3
+ 504 005e 1437     		adds	r7, r7, #20
+ 505 0060 BD46     		mov	sp, r7
+ 506              		@ sp needed
+ 507 0062 5DF8047B 		ldr	r7, [sp], #4
+ 508 0066 7047     		bx	lr
+ 509              		.cfi_endproc
+ 510              	.LFE62:
+ 511              		.size	FS_MMC_HW_X_SetVoltage, .-FS_MMC_HW_X_SetVoltage
+ 512              		.section	.text.FS_MMC_HW_X_IsPresent,"ax",%progbits
+ 513              		.align	2
+ 514              		.global	FS_MMC_HW_X_IsPresent
+ 515              		.thumb
+ 516              		.thumb_func
+ 517              		.type	FS_MMC_HW_X_IsPresent, %function
+ 518              	FS_MMC_HW_X_IsPresent:
+ 519              	.LFB63:
+ 727:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 728:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 729:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 730:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_IsPresent
+ 731:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 732:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 733:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 23
+
+
+ 734:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Returns the state of the media. If you do not know the state, return
+ 735:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS_MEDIA_STATE_UNKNOWN and the higher layer will try to figure out if
+ 736:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  a media is present.
+ 737:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 738:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 739:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  Unit                      - Device Index.
+ 740:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 741:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 742:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS_MEDIA_STATE_UNKNOWN    - Media state is unknown;
+ 743:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS_MEDIA_NOT_PRESENT      - Media is not present;
+ 744:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS_MEDIA_IS_PRESENT       - Media is present.
+ 745:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 746:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 747:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 748:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 749:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 750:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** int FS_MMC_HW_X_IsPresent(U8 Unit)
+ 751:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** {
+ 520              		.loc 1 751 0
+ 521              		.cfi_startproc
+ 522              		@ args = 0, pretend = 0, frame = 16
+ 523              		@ frame_needed = 1, uses_anonymous_args = 0
+ 524 0000 80B5     		push	{r7, lr}
+ 525              		.cfi_def_cfa_offset 8
+ 526              		.cfi_offset 7, -8
+ 527              		.cfi_offset 14, -4
+ 528 0002 84B0     		sub	sp, sp, #16
+ 529              		.cfi_def_cfa_offset 24
+ 530 0004 00AF     		add	r7, sp, #0
+ 531              		.cfi_def_cfa_register 7
+ 532 0006 0346     		mov	r3, r0
+ 533 0008 FB71     		strb	r3, [r7, #7]
+ 752:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****      int result;
+ 753:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 754:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     emFile_1_Init(Unit);
+ 534              		.loc 1 754 0
+ 535 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 536 000c 1846     		mov	r0, r3
+ 537 000e FFF7FEFF 		bl	emFile_1_Init
+ 755:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 756:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     switch(Unit)
+ 538              		.loc 1 756 0
+ 539 0012 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 540 0014 0033     		adds	r3, r3, #0
+ 541 0016 032B     		cmp	r3, #3
+ 542 0018 02D8     		bhi	.L53
+ 757:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 758:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 0u:
+ 759:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 760:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 1u:
+ 761:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 762:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 2u:
+ 763:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 764:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     case 3u:
+ 765:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 766:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         result = FS_MEDIA_STATE_UNKNOWN;
+ 543              		.loc 1 766 0
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 24
+
+
+ 544 001a 0223     		movs	r3, #2
+ 545 001c FB60     		str	r3, [r7, #12]
+ 767:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 546              		.loc 1 767 0
+ 547 001e 02E0     		b	.L55
+ 548              	.L53:
+ 768:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 769:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     default:
+ 770:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 771:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         result = FS_MEDIA_STATE_UNKNOWN;
+ 549              		.loc 1 771 0
+ 550 0020 0223     		movs	r3, #2
+ 551 0022 FB60     		str	r3, [r7, #12]
+ 772:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         break;
+ 552              		.loc 1 772 0
+ 553 0024 00BF     		nop
+ 554              	.L55:
+ 773:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 774:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 775:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     return(result);
+ 555              		.loc 1 775 0
+ 556 0026 FB68     		ldr	r3, [r7, #12]
+ 776:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** }
+ 557              		.loc 1 776 0
+ 558 0028 1846     		mov	r0, r3
+ 559 002a 1037     		adds	r7, r7, #16
+ 560 002c BD46     		mov	sp, r7
+ 561              		@ sp needed
+ 562 002e 80BD     		pop	{r7, pc}
+ 563              		.cfi_endproc
+ 564              	.LFE63:
+ 565              		.size	FS_MMC_HW_X_IsPresent, .-FS_MMC_HW_X_IsPresent
+ 566              		.section	.text.FS_MMC_HW_X_Read,"ax",%progbits
+ 567              		.align	2
+ 568              		.global	FS_MMC_HW_X_Read
+ 569              		.thumb
+ 570              		.thumb_func
+ 571              		.type	FS_MMC_HW_X_Read, %function
+ 572              	FS_MMC_HW_X_Read:
+ 573              	.LFB64:
+ 777:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 778:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 779:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 780:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_Read
+ 781:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 782:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 783:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 784:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Reads a specified number of bytes from MMC card to 
+ 785:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  buffer.
+ 786:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 787:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 788:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    Unit             - Device Index;
+ 789:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    pData            - Pointer to a data buffer;
+ 790:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    NumBytes         - Number of bytes.
+ 791:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 792:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 793:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  None
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 25
+
+
+ 794:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 795:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 796:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 797:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 798:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 799:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #if (CY_PSOC5)
+ 800:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     void  FS_MMC_HW_X_Read (U8 Unit, U8 * pData, int NumBytes)
+ 801:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 574              		.loc 1 801 0
+ 575              		.cfi_startproc
+ 576              		@ args = 0, pretend = 0, frame = 16
+ 577              		@ frame_needed = 1, uses_anonymous_args = 0
+ 578 0000 90B5     		push	{r4, r7, lr}
+ 579              		.cfi_def_cfa_offset 12
+ 580              		.cfi_offset 4, -12
+ 581              		.cfi_offset 7, -8
+ 582              		.cfi_offset 14, -4
+ 583 0002 85B0     		sub	sp, sp, #20
+ 584              		.cfi_def_cfa_offset 32
+ 585 0004 00AF     		add	r7, sp, #0
+ 586              		.cfi_def_cfa_register 7
+ 587 0006 0346     		mov	r3, r0
+ 588 0008 B960     		str	r1, [r7, #8]
+ 589 000a 7A60     		str	r2, [r7, #4]
+ 590 000c FB73     		strb	r3, [r7, #15]
+ 591              	.L58:
+ 802:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         do
+ 803:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 804:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             *pData++ = emFile_1_ReadWriteSPI(Unit, 0xff);
+ 592              		.loc 1 804 0 discriminator 1
+ 593 000e BC68     		ldr	r4, [r7, #8]
+ 594 0010 631C     		adds	r3, r4, #1
+ 595 0012 BB60     		str	r3, [r7, #8]
+ 596 0014 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 597 0016 1846     		mov	r0, r3
+ 598 0018 FF21     		movs	r1, #255
+ 599 001a FFF7FEFF 		bl	emFile_1_ReadWriteSPI
+ 600 001e 0346     		mov	r3, r0
+ 601 0020 2370     		strb	r3, [r4]
+ 805:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         } while (--NumBytes);
+ 602              		.loc 1 805 0 discriminator 1
+ 603 0022 7B68     		ldr	r3, [r7, #4]
+ 604 0024 013B     		subs	r3, r3, #1
+ 605 0026 7B60     		str	r3, [r7, #4]
+ 606 0028 7B68     		ldr	r3, [r7, #4]
+ 607 002a 002B     		cmp	r3, #0
+ 608 002c EFD1     		bne	.L58
+ 806:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 609              		.loc 1 806 0
+ 610 002e 1437     		adds	r7, r7, #20
+ 611 0030 BD46     		mov	sp, r7
+ 612              		@ sp needed
+ 613 0032 90BD     		pop	{r4, r7, pc}
+ 614              		.cfi_endproc
+ 615              	.LFE64:
+ 616              		.size	FS_MMC_HW_X_Read, .-FS_MMC_HW_X_Read
+ 617              		.section	.text.FS_MMC_HW_X_Write,"ax",%progbits
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 26
+
+
+ 618              		.align	2
+ 619              		.global	FS_MMC_HW_X_Write
+ 620              		.thumb
+ 621              		.thumb_func
+ 622              		.type	FS_MMC_HW_X_Write, %function
+ 623              	FS_MMC_HW_X_Write:
+ 624              	.LFB65:
+ 807:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #else
+ 808:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     void  FS_MMC_HW_X_Read (U8 Unit, U8 xdata * pData, int NumBytes)
+ 809:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 810:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         do
+ 811:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 812:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             *pData++ = emFile_1_ReadWriteSPI(Unit, 0xff);
+ 813:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         } while (--NumBytes);
+ 814:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 815:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #endif /* (CY_PSOC5) */
+ 816:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 817:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** 
+ 818:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** /*******************************************************************************
+ 819:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Function Name: FS_MMC_HW_X_Write
+ 820:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** ********************************************************************************
+ 821:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 822:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Summary:
+ 823:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  FS low level function. Writes a specified number of bytes from
+ 824:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  data buffer to the MMC/SD card.
+ 825:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 826:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Parameters:
+ 827:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    Unit             - Device Index;
+ 828:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    pData            - Pointer to a data buffer;
+ 829:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *    NumBytes         - Number of bytes.
+ 830:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 831:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Return:
+ 832:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  None
+ 833:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 834:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** * Reentrant:
+ 835:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *  No
+ 836:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *
+ 837:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** *******************************************************************************/
+ 838:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c **** #if (CY_PSOC5)
+ 839:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     void  FS_MMC_HW_X_Write(U8 Unit, const U8 * pData, int NumBytes) 
+ 840:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     {
+ 625              		.loc 1 840 0
+ 626              		.cfi_startproc
+ 627              		@ args = 0, pretend = 0, frame = 16
+ 628              		@ frame_needed = 1, uses_anonymous_args = 0
+ 629 0000 80B5     		push	{r7, lr}
+ 630              		.cfi_def_cfa_offset 8
+ 631              		.cfi_offset 7, -8
+ 632              		.cfi_offset 14, -4
+ 633 0002 84B0     		sub	sp, sp, #16
+ 634              		.cfi_def_cfa_offset 24
+ 635 0004 00AF     		add	r7, sp, #0
+ 636              		.cfi_def_cfa_register 7
+ 637 0006 0346     		mov	r3, r0
+ 638 0008 B960     		str	r1, [r7, #8]
+ 639 000a 7A60     		str	r2, [r7, #4]
+ 640 000c FB73     		strb	r3, [r7, #15]
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 27
+
+
+ 641              	.L60:
+ 841:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         do
+ 842:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         {
+ 843:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****             emFile_1_ReadWriteSPI(Unit, *pData++);
+ 642              		.loc 1 843 0 discriminator 1
+ 643 000e BB68     		ldr	r3, [r7, #8]
+ 644 0010 5A1C     		adds	r2, r3, #1
+ 645 0012 BA60     		str	r2, [r7, #8]
+ 646 0014 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 647 0016 FA7B     		ldrb	r2, [r7, #15]	@ zero_extendqisi2
+ 648 0018 1046     		mov	r0, r2
+ 649 001a 1946     		mov	r1, r3
+ 650 001c FFF7FEFF 		bl	emFile_1_ReadWriteSPI
+ 844:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****         } while (--NumBytes);
+ 651              		.loc 1 844 0 discriminator 1
+ 652 0020 7B68     		ldr	r3, [r7, #4]
+ 653 0022 013B     		subs	r3, r3, #1
+ 654 0024 7B60     		str	r3, [r7, #4]
+ 655 0026 7B68     		ldr	r3, [r7, #4]
+ 656 0028 002B     		cmp	r3, #0
+ 657 002a F0D1     		bne	.L60
+ 845:.\Generated_Source\PSoC5/emFile_1_MMC_HW_SPI.c ****     }
+ 658              		.loc 1 845 0
+ 659 002c 1037     		adds	r7, r7, #16
+ 660 002e BD46     		mov	sp, r7
+ 661              		@ sp needed
+ 662 0030 80BD     		pop	{r7, pc}
+ 663              		.cfi_endproc
+ 664              	.LFE65:
+ 665              		.size	FS_MMC_HW_X_Write, .-FS_MMC_HW_X_Write
+ 666 0032 00BF     		.text
+ 667              	.Letext0:
+ 668              		.file 2 "c:\\program files\\cypress\\psoc creator\\3.1\\psoc creator\\import\\gnu_cs\\arm\\4.8.4\\
+ 669              		.file 3 "c:\\program files\\cypress\\psoc creator\\3.1\\psoc creator\\import\\gnu_cs\\arm\\4.8.4\\
+ 670              		.file 4 ".\\Generated_Source\\PSoC5/cytypes.h"
+ 671              		.file 5 ".\\Generated_Source\\PSoC5/core_cm3.h"
+ 672              		.section	.debug_info,"",%progbits
+ 673              	.Ldebug_info0:
+ 674 0000 34030000 		.4byte	0x334
+ 675 0004 0400     		.2byte	0x4
+ 676 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 677 000a 04       		.byte	0x4
+ 678 000b 01       		.uleb128 0x1
+ 679 000c 7D010000 		.4byte	.LASF37
+ 680 0010 01       		.byte	0x1
+ 681 0011 47020000 		.4byte	.LASF38
+ 682 0015 36000000 		.4byte	.LASF39
+ 683 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 684 001d 00000000 		.4byte	0
+ 685 0021 00000000 		.4byte	.Ldebug_line0
+ 686 0025 02       		.uleb128 0x2
+ 687 0026 02       		.byte	0x2
+ 688 0027 07       		.byte	0x7
+ 689 0028 B0000000 		.4byte	.LASF0
+ 690 002c 02       		.uleb128 0x2
+ 691 002d 04       		.byte	0x4
+ 692 002e 07       		.byte	0x7
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 28
+
+
+ 693 002f E1000000 		.4byte	.LASF1
+ 694 0033 02       		.uleb128 0x2
+ 695 0034 04       		.byte	0x4
+ 696 0035 07       		.byte	0x7
+ 697 0036 3A010000 		.4byte	.LASF2
+ 698 003a 03       		.uleb128 0x3
+ 699 003b 04       		.byte	0x4
+ 700 003c 05       		.byte	0x5
+ 701 003d 696E7400 		.ascii	"int\000"
+ 702 0041 02       		.uleb128 0x2
+ 703 0042 01       		.byte	0x1
+ 704 0043 08       		.byte	0x8
+ 705 0044 82000000 		.4byte	.LASF3
+ 706 0048 02       		.uleb128 0x2
+ 707 0049 04       		.byte	0x4
+ 708 004a 07       		.byte	0x7
+ 709 004b 13020000 		.4byte	.LASF4
+ 710 004f 02       		.uleb128 0x2
+ 711 0050 01       		.byte	0x1
+ 712 0051 08       		.byte	0x8
+ 713 0052 33020000 		.4byte	.LASF5
+ 714 0056 02       		.uleb128 0x2
+ 715 0057 02       		.byte	0x2
+ 716 0058 05       		.byte	0x5
+ 717 0059 08010000 		.4byte	.LASF6
+ 718 005d 02       		.uleb128 0x2
+ 719 005e 04       		.byte	0x4
+ 720 005f 05       		.byte	0x5
+ 721 0060 7C020000 		.4byte	.LASF7
+ 722 0064 04       		.uleb128 0x4
+ 723 0065 04       		.byte	0x4
+ 724 0066 41000000 		.4byte	0x41
+ 725 006a 02       		.uleb128 0x2
+ 726 006b 01       		.byte	0x1
+ 727 006c 06       		.byte	0x6
+ 728 006d 93020000 		.4byte	.LASF8
+ 729 0071 05       		.uleb128 0x5
+ 730 0072 25000000 		.4byte	.LASF11
+ 731 0076 02       		.byte	0x2
+ 732 0077 37       		.byte	0x37
+ 733 0078 5D000000 		.4byte	0x5d
+ 734 007c 02       		.uleb128 0x2
+ 735 007d 08       		.byte	0x8
+ 736 007e 05       		.byte	0x5
+ 737 007f 1C020000 		.4byte	.LASF9
+ 738 0083 02       		.uleb128 0x2
+ 739 0084 08       		.byte	0x8
+ 740 0085 07       		.byte	0x7
+ 741 0086 5A010000 		.4byte	.LASF10
+ 742 008a 05       		.uleb128 0x5
+ 743 008b 0B020000 		.4byte	.LASF12
+ 744 008f 03       		.byte	0x3
+ 745 0090 41       		.byte	0x41
+ 746 0091 71000000 		.4byte	0x71
+ 747 0095 05       		.uleb128 0x5
+ 748 0096 76020000 		.4byte	.LASF13
+ 749 009a 04       		.byte	0x4
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 29
+
+
+ 750 009b A1       		.byte	0xa1
+ 751 009c 41000000 		.4byte	0x41
+ 752 00a0 02       		.uleb128 0x2
+ 753 00a1 04       		.byte	0x4
+ 754 00a2 04       		.byte	0x4
+ 755 00a3 7C000000 		.4byte	.LASF14
+ 756 00a7 02       		.uleb128 0x2
+ 757 00a8 08       		.byte	0x8
+ 758 00a9 04       		.byte	0x4
+ 759 00aa 2F000000 		.4byte	.LASF15
+ 760 00ae 06       		.uleb128 0x6
+ 761 00af 85020000 		.4byte	.LASF40
+ 762 00b3 01       		.byte	0x1
+ 763 00b4 4B       		.byte	0x4b
+ 764 00b5 00000000 		.4byte	.LFB56
+ 765 00b9 64000000 		.4byte	.LFE56-.LFB56
+ 766 00bd 01       		.uleb128 0x1
+ 767 00be 9C       		.byte	0x9c
+ 768 00bf D2000000 		.4byte	0xd2
+ 769 00c3 07       		.uleb128 0x7
+ 770 00c4 9F020000 		.4byte	.LASF16
+ 771 00c8 01       		.byte	0x1
+ 772 00c9 4B       		.byte	0x4b
+ 773 00ca 41000000 		.4byte	0x41
+ 774 00ce 02       		.uleb128 0x2
+ 775 00cf 91       		.byte	0x91
+ 776 00d0 77       		.sleb128 -9
+ 777 00d1 00       		.byte	0
+ 778 00d2 08       		.uleb128 0x8
+ 779 00d3 BA020000 		.4byte	.LASF41
+ 780 00d7 01       		.byte	0x1
+ 781 00d8 E0       		.byte	0xe0
+ 782 00d9 41000000 		.4byte	0x41
+ 783 00dd 00000000 		.4byte	.LFB57
+ 784 00e1 66000000 		.4byte	.LFE57-.LFB57
+ 785 00e5 01       		.uleb128 0x1
+ 786 00e6 9C       		.byte	0x9c
+ 787 00e7 16010000 		.4byte	0x116
+ 788 00eb 07       		.uleb128 0x7
+ 789 00ec 9F020000 		.4byte	.LASF16
+ 790 00f0 01       		.byte	0x1
+ 791 00f1 E0       		.byte	0xe0
+ 792 00f2 41000000 		.4byte	0x41
+ 793 00f6 02       		.uleb128 0x2
+ 794 00f7 91       		.byte	0x91
+ 795 00f8 6F       		.sleb128 -17
+ 796 00f9 07       		.uleb128 0x7
+ 797 00fa 3D020000 		.4byte	.LASF17
+ 798 00fe 01       		.byte	0x1
+ 799 00ff E0       		.byte	0xe0
+ 800 0100 41000000 		.4byte	0x41
+ 801 0104 02       		.uleb128 0x2
+ 802 0105 91       		.byte	0x91
+ 803 0106 6E       		.sleb128 -18
+ 804 0107 09       		.uleb128 0x9
+ 805 0108 A8000000 		.4byte	.LASF20
+ 806 010c 01       		.byte	0x1
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 30
+
+
+ 807 010d E2       		.byte	0xe2
+ 808 010e 41000000 		.4byte	0x41
+ 809 0112 02       		.uleb128 0x2
+ 810 0113 91       		.byte	0x91
+ 811 0114 77       		.sleb128 -9
+ 812 0115 00       		.byte	0
+ 813 0116 0A       		.uleb128 0xa
+ 814 0117 F3000000 		.4byte	.LASF18
+ 815 011b 01       		.byte	0x1
+ 816 011c 4901     		.2byte	0x149
+ 817 011e 00000000 		.4byte	.LFB58
+ 818 0122 26000000 		.4byte	.LFE58-.LFB58
+ 819 0126 01       		.uleb128 0x1
+ 820 0127 9C       		.byte	0x9c
+ 821 0128 3C010000 		.4byte	0x13c
+ 822 012c 0B       		.uleb128 0xb
+ 823 012d 9F020000 		.4byte	.LASF16
+ 824 0131 01       		.byte	0x1
+ 825 0132 4901     		.2byte	0x149
+ 826 0134 41000000 		.4byte	0x41
+ 827 0138 02       		.uleb128 0x2
+ 828 0139 91       		.byte	0x91
+ 829 013a 77       		.sleb128 -9
+ 830 013b 00       		.byte	0
+ 831 013c 0A       		.uleb128 0xa
+ 832 013d A4020000 		.4byte	.LASF19
+ 833 0141 01       		.byte	0x1
+ 834 0142 9001     		.2byte	0x190
+ 835 0144 00000000 		.4byte	.LFB59
+ 836 0148 26000000 		.4byte	.LFE59-.LFB59
+ 837 014c 01       		.uleb128 0x1
+ 838 014d 9C       		.byte	0x9c
+ 839 014e 62010000 		.4byte	0x162
+ 840 0152 0B       		.uleb128 0xb
+ 841 0153 9F020000 		.4byte	.LASF16
+ 842 0157 01       		.byte	0x1
+ 843 0158 9001     		.2byte	0x190
+ 844 015a 41000000 		.4byte	0x41
+ 845 015e 02       		.uleb128 0x2
+ 846 015f 91       		.byte	0x91
+ 847 0160 77       		.sleb128 -9
+ 848 0161 00       		.byte	0
+ 849 0162 0C       		.uleb128 0xc
+ 850 0163 00000000 		.4byte	.LASF22
+ 851 0167 01       		.byte	0x1
+ 852 0168 D401     		.2byte	0x1d4
+ 853 016a 3A000000 		.4byte	0x3a
+ 854 016e 00000000 		.4byte	.LFB60
+ 855 0172 2A000000 		.4byte	.LFE60-.LFB60
+ 856 0176 01       		.uleb128 0x1
+ 857 0177 9C       		.byte	0x9c
+ 858 0178 9B010000 		.4byte	0x19b
+ 859 017c 0B       		.uleb128 0xb
+ 860 017d 9F020000 		.4byte	.LASF16
+ 861 0181 01       		.byte	0x1
+ 862 0182 D401     		.2byte	0x1d4
+ 863 0184 41000000 		.4byte	0x41
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 31
+
+
+ 864 0188 02       		.uleb128 0x2
+ 865 0189 91       		.byte	0x91
+ 866 018a 6F       		.sleb128 -17
+ 867 018b 0D       		.uleb128 0xd
+ 868 018c 1D000000 		.4byte	.LASF21
+ 869 0190 01       		.byte	0x1
+ 870 0191 D601     		.2byte	0x1d6
+ 871 0193 3A000000 		.4byte	0x3a
+ 872 0197 02       		.uleb128 0x2
+ 873 0198 91       		.byte	0x91
+ 874 0199 74       		.sleb128 -12
+ 875 019a 00       		.byte	0
+ 876 019b 0E       		.uleb128 0xe
+ 877 019c 90000000 		.4byte	.LASF23
+ 878 01a0 01       		.byte	0x1
+ 879 01a1 4B02     		.2byte	0x24b
+ 880 01a3 25000000 		.4byte	0x25
+ 881 01a7 00000000 		.4byte	.LFB61
+ 882 01ab 84000000 		.4byte	.LFE61-.LFB61
+ 883 01af 01       		.uleb128 0x1
+ 884 01b0 9C       		.byte	0x9c
+ 885 01b1 F2010000 		.4byte	0x1f2
+ 886 01b5 0B       		.uleb128 0xb
+ 887 01b6 9F020000 		.4byte	.LASF16
+ 888 01ba 01       		.byte	0x1
+ 889 01bb 4B02     		.2byte	0x24b
+ 890 01bd 41000000 		.4byte	0x41
+ 891 01c1 02       		.uleb128 0x2
+ 892 01c2 91       		.byte	0x91
+ 893 01c3 6F       		.sleb128 -17
+ 894 01c4 0B       		.uleb128 0xb
+ 895 01c5 1C010000 		.4byte	.LASF24
+ 896 01c9 01       		.byte	0x1
+ 897 01ca 4B02     		.2byte	0x24b
+ 898 01cc 25000000 		.4byte	0x25
+ 899 01d0 02       		.uleb128 0x2
+ 900 01d1 91       		.byte	0x91
+ 901 01d2 6C       		.sleb128 -20
+ 902 01d3 0D       		.uleb128 0xd
+ 903 01d4 42020000 		.4byte	.LASF25
+ 904 01d8 01       		.byte	0x1
+ 905 01d9 4D02     		.2byte	0x24d
+ 906 01db 25000000 		.4byte	0x25
+ 907 01df 02       		.uleb128 0x2
+ 908 01e0 91       		.byte	0x91
+ 909 01e1 76       		.sleb128 -10
+ 910 01e2 0D       		.uleb128 0xd
+ 911 01e3 12010000 		.4byte	.LASF26
+ 912 01e7 01       		.byte	0x1
+ 913 01e8 4E02     		.2byte	0x24e
+ 914 01ea 2C000000 		.4byte	0x2c
+ 915 01ee 02       		.uleb128 0x2
+ 916 01ef 91       		.byte	0x91
+ 917 01f0 70       		.sleb128 -16
+ 918 01f1 00       		.byte	0
+ 919 01f2 0C       		.uleb128 0xc
+ 920 01f3 D0020000 		.4byte	.LASF27
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 32
+
+
+ 921 01f7 01       		.byte	0x1
+ 922 01f8 AC02     		.2byte	0x2ac
+ 923 01fa 3A000000 		.4byte	0x3a
+ 924 01fe 00000000 		.4byte	.LFB62
+ 925 0202 68000000 		.4byte	.LFE62-.LFB62
+ 926 0206 01       		.uleb128 0x1
+ 927 0207 9C       		.byte	0x9c
+ 928 0208 49020000 		.4byte	0x249
+ 929 020c 0B       		.uleb128 0xb
+ 930 020d 9F020000 		.4byte	.LASF16
+ 931 0211 01       		.byte	0x1
+ 932 0212 AC02     		.2byte	0x2ac
+ 933 0214 41000000 		.4byte	0x41
+ 934 0218 02       		.uleb128 0x2
+ 935 0219 91       		.byte	0x91
+ 936 021a 6F       		.sleb128 -17
+ 937 021b 0B       		.uleb128 0xb
+ 938 021c 38020000 		.4byte	.LASF28
+ 939 0220 01       		.byte	0x1
+ 940 0221 AC02     		.2byte	0x2ac
+ 941 0223 25000000 		.4byte	0x25
+ 942 0227 02       		.uleb128 0x2
+ 943 0228 91       		.byte	0x91
+ 944 0229 6C       		.sleb128 -20
+ 945 022a 0B       		.uleb128 0xb
+ 946 022b 71010000 		.4byte	.LASF29
+ 947 022f 01       		.byte	0x1
+ 948 0230 AC02     		.2byte	0x2ac
+ 949 0232 25000000 		.4byte	0x25
+ 950 0236 02       		.uleb128 0x2
+ 951 0237 91       		.byte	0x91
+ 952 0238 6A       		.sleb128 -22
+ 953 0239 0D       		.uleb128 0xd
+ 954 023a 76010000 		.4byte	.LASF30
+ 955 023e 01       		.byte	0x1
+ 956 023f AE02     		.2byte	0x2ae
+ 957 0241 3A000000 		.4byte	0x3a
+ 958 0245 02       		.uleb128 0x2
+ 959 0246 91       		.byte	0x91
+ 960 0247 74       		.sleb128 -12
+ 961 0248 00       		.byte	0
+ 962 0249 0E       		.uleb128 0xe
+ 963 024a 24010000 		.4byte	.LASF31
+ 964 024e 01       		.byte	0x1
+ 965 024f EE02     		.2byte	0x2ee
+ 966 0251 3A000000 		.4byte	0x3a
+ 967 0255 00000000 		.4byte	.LFB63
+ 968 0259 30000000 		.4byte	.LFE63-.LFB63
+ 969 025d 01       		.uleb128 0x1
+ 970 025e 9C       		.byte	0x9c
+ 971 025f 82020000 		.4byte	0x282
+ 972 0263 0B       		.uleb128 0xb
+ 973 0264 9F020000 		.4byte	.LASF16
+ 974 0268 01       		.byte	0x1
+ 975 0269 EE02     		.2byte	0x2ee
+ 976 026b 41000000 		.4byte	0x41
+ 977 026f 02       		.uleb128 0x2
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 33
+
+
+ 978 0270 91       		.byte	0x91
+ 979 0271 6F       		.sleb128 -17
+ 980 0272 0D       		.uleb128 0xd
+ 981 0273 76010000 		.4byte	.LASF30
+ 982 0277 01       		.byte	0x1
+ 983 0278 F002     		.2byte	0x2f0
+ 984 027a 3A000000 		.4byte	0x3a
+ 985 027e 02       		.uleb128 0x2
+ 986 027f 91       		.byte	0x91
+ 987 0280 74       		.sleb128 -12
+ 988 0281 00       		.byte	0
+ 989 0282 0A       		.uleb128 0xa
+ 990 0283 C3000000 		.4byte	.LASF32
+ 991 0287 01       		.byte	0x1
+ 992 0288 2003     		.2byte	0x320
+ 993 028a 00000000 		.4byte	.LFB64
+ 994 028e 34000000 		.4byte	.LFE64-.LFB64
+ 995 0292 01       		.uleb128 0x1
+ 996 0293 9C       		.byte	0x9c
+ 997 0294 C6020000 		.4byte	0x2c6
+ 998 0298 0B       		.uleb128 0xb
+ 999 0299 9F020000 		.4byte	.LASF16
+ 1000 029d 01       		.byte	0x1
+ 1001 029e 2003     		.2byte	0x320
+ 1002 02a0 41000000 		.4byte	0x41
+ 1003 02a4 02       		.uleb128 0x2
+ 1004 02a5 91       		.byte	0x91
+ 1005 02a6 6F       		.sleb128 -17
+ 1006 02a7 0B       		.uleb128 0xb
+ 1007 02a8 76000000 		.4byte	.LASF33
+ 1008 02ac 01       		.byte	0x1
+ 1009 02ad 2003     		.2byte	0x320
+ 1010 02af 64000000 		.4byte	0x64
+ 1011 02b3 02       		.uleb128 0x2
+ 1012 02b4 91       		.byte	0x91
+ 1013 02b5 68       		.sleb128 -24
+ 1014 02b6 0B       		.uleb128 0xb
+ 1015 02b7 2A020000 		.4byte	.LASF34
+ 1016 02bb 01       		.byte	0x1
+ 1017 02bc 2003     		.2byte	0x320
+ 1018 02be 3A000000 		.4byte	0x3a
+ 1019 02c2 02       		.uleb128 0x2
+ 1020 02c3 91       		.byte	0x91
+ 1021 02c4 64       		.sleb128 -28
+ 1022 02c5 00       		.byte	0
+ 1023 02c6 0A       		.uleb128 0xa
+ 1024 02c7 F9010000 		.4byte	.LASF35
+ 1025 02cb 01       		.byte	0x1
+ 1026 02cc 4703     		.2byte	0x347
+ 1027 02ce 00000000 		.4byte	.LFB65
+ 1028 02d2 32000000 		.4byte	.LFE65-.LFB65
+ 1029 02d6 01       		.uleb128 0x1
+ 1030 02d7 9C       		.byte	0x9c
+ 1031 02d8 0A030000 		.4byte	0x30a
+ 1032 02dc 0B       		.uleb128 0xb
+ 1033 02dd 9F020000 		.4byte	.LASF16
+ 1034 02e1 01       		.byte	0x1
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 34
+
+
+ 1035 02e2 4703     		.2byte	0x347
+ 1036 02e4 41000000 		.4byte	0x41
+ 1037 02e8 02       		.uleb128 0x2
+ 1038 02e9 91       		.byte	0x91
+ 1039 02ea 77       		.sleb128 -9
+ 1040 02eb 0B       		.uleb128 0xb
+ 1041 02ec 76000000 		.4byte	.LASF33
+ 1042 02f0 01       		.byte	0x1
+ 1043 02f1 4703     		.2byte	0x347
+ 1044 02f3 0A030000 		.4byte	0x30a
+ 1045 02f7 02       		.uleb128 0x2
+ 1046 02f8 91       		.byte	0x91
+ 1047 02f9 70       		.sleb128 -16
+ 1048 02fa 0B       		.uleb128 0xb
+ 1049 02fb 2A020000 		.4byte	.LASF34
+ 1050 02ff 01       		.byte	0x1
+ 1051 0300 4703     		.2byte	0x347
+ 1052 0302 3A000000 		.4byte	0x3a
+ 1053 0306 02       		.uleb128 0x2
+ 1054 0307 91       		.byte	0x91
+ 1055 0308 6C       		.sleb128 -20
+ 1056 0309 00       		.byte	0
+ 1057 030a 04       		.uleb128 0x4
+ 1058 030b 04       		.byte	0x4
+ 1059 030c 10030000 		.4byte	0x310
+ 1060 0310 0F       		.uleb128 0xf
+ 1061 0311 41000000 		.4byte	0x41
+ 1062 0315 09       		.uleb128 0x9
+ 1063 0316 47010000 		.4byte	.LASF36
+ 1064 031a 01       		.byte	0x1
+ 1065 031b 25       		.byte	0x25
+ 1066 031c 4F000000 		.4byte	0x4f
+ 1067 0320 05       		.uleb128 0x5
+ 1068 0321 03       		.byte	0x3
+ 1069 0322 00000000 		.4byte	emFile_1_isInited0
+ 1070 0326 10       		.uleb128 0x10
+ 1071 0327 D4000000 		.4byte	.LASF42
+ 1072 032b 05       		.byte	0x5
+ 1073 032c 1606     		.2byte	0x616
+ 1074 032e 32030000 		.4byte	0x332
+ 1075 0332 11       		.uleb128 0x11
+ 1076 0333 8A000000 		.4byte	0x8a
+ 1077 0337 00       		.byte	0
+ 1078              		.section	.debug_abbrev,"",%progbits
+ 1079              	.Ldebug_abbrev0:
+ 1080 0000 01       		.uleb128 0x1
+ 1081 0001 11       		.uleb128 0x11
+ 1082 0002 01       		.byte	0x1
+ 1083 0003 25       		.uleb128 0x25
+ 1084 0004 0E       		.uleb128 0xe
+ 1085 0005 13       		.uleb128 0x13
+ 1086 0006 0B       		.uleb128 0xb
+ 1087 0007 03       		.uleb128 0x3
+ 1088 0008 0E       		.uleb128 0xe
+ 1089 0009 1B       		.uleb128 0x1b
+ 1090 000a 0E       		.uleb128 0xe
+ 1091 000b 55       		.uleb128 0x55
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 35
+
+
+ 1092 000c 17       		.uleb128 0x17
+ 1093 000d 11       		.uleb128 0x11
+ 1094 000e 01       		.uleb128 0x1
+ 1095 000f 10       		.uleb128 0x10
+ 1096 0010 17       		.uleb128 0x17
+ 1097 0011 00       		.byte	0
+ 1098 0012 00       		.byte	0
+ 1099 0013 02       		.uleb128 0x2
+ 1100 0014 24       		.uleb128 0x24
+ 1101 0015 00       		.byte	0
+ 1102 0016 0B       		.uleb128 0xb
+ 1103 0017 0B       		.uleb128 0xb
+ 1104 0018 3E       		.uleb128 0x3e
+ 1105 0019 0B       		.uleb128 0xb
+ 1106 001a 03       		.uleb128 0x3
+ 1107 001b 0E       		.uleb128 0xe
+ 1108 001c 00       		.byte	0
+ 1109 001d 00       		.byte	0
+ 1110 001e 03       		.uleb128 0x3
+ 1111 001f 24       		.uleb128 0x24
+ 1112 0020 00       		.byte	0
+ 1113 0021 0B       		.uleb128 0xb
+ 1114 0022 0B       		.uleb128 0xb
+ 1115 0023 3E       		.uleb128 0x3e
+ 1116 0024 0B       		.uleb128 0xb
+ 1117 0025 03       		.uleb128 0x3
+ 1118 0026 08       		.uleb128 0x8
+ 1119 0027 00       		.byte	0
+ 1120 0028 00       		.byte	0
+ 1121 0029 04       		.uleb128 0x4
+ 1122 002a 0F       		.uleb128 0xf
+ 1123 002b 00       		.byte	0
+ 1124 002c 0B       		.uleb128 0xb
+ 1125 002d 0B       		.uleb128 0xb
+ 1126 002e 49       		.uleb128 0x49
+ 1127 002f 13       		.uleb128 0x13
+ 1128 0030 00       		.byte	0
+ 1129 0031 00       		.byte	0
+ 1130 0032 05       		.uleb128 0x5
+ 1131 0033 16       		.uleb128 0x16
+ 1132 0034 00       		.byte	0
+ 1133 0035 03       		.uleb128 0x3
+ 1134 0036 0E       		.uleb128 0xe
+ 1135 0037 3A       		.uleb128 0x3a
+ 1136 0038 0B       		.uleb128 0xb
+ 1137 0039 3B       		.uleb128 0x3b
+ 1138 003a 0B       		.uleb128 0xb
+ 1139 003b 49       		.uleb128 0x49
+ 1140 003c 13       		.uleb128 0x13
+ 1141 003d 00       		.byte	0
+ 1142 003e 00       		.byte	0
+ 1143 003f 06       		.uleb128 0x6
+ 1144 0040 2E       		.uleb128 0x2e
+ 1145 0041 01       		.byte	0x1
+ 1146 0042 03       		.uleb128 0x3
+ 1147 0043 0E       		.uleb128 0xe
+ 1148 0044 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 36
+
+
+ 1149 0045 0B       		.uleb128 0xb
+ 1150 0046 3B       		.uleb128 0x3b
+ 1151 0047 0B       		.uleb128 0xb
+ 1152 0048 27       		.uleb128 0x27
+ 1153 0049 19       		.uleb128 0x19
+ 1154 004a 11       		.uleb128 0x11
+ 1155 004b 01       		.uleb128 0x1
+ 1156 004c 12       		.uleb128 0x12
+ 1157 004d 06       		.uleb128 0x6
+ 1158 004e 40       		.uleb128 0x40
+ 1159 004f 18       		.uleb128 0x18
+ 1160 0050 9642     		.uleb128 0x2116
+ 1161 0052 19       		.uleb128 0x19
+ 1162 0053 01       		.uleb128 0x1
+ 1163 0054 13       		.uleb128 0x13
+ 1164 0055 00       		.byte	0
+ 1165 0056 00       		.byte	0
+ 1166 0057 07       		.uleb128 0x7
+ 1167 0058 05       		.uleb128 0x5
+ 1168 0059 00       		.byte	0
+ 1169 005a 03       		.uleb128 0x3
+ 1170 005b 0E       		.uleb128 0xe
+ 1171 005c 3A       		.uleb128 0x3a
+ 1172 005d 0B       		.uleb128 0xb
+ 1173 005e 3B       		.uleb128 0x3b
+ 1174 005f 0B       		.uleb128 0xb
+ 1175 0060 49       		.uleb128 0x49
+ 1176 0061 13       		.uleb128 0x13
+ 1177 0062 02       		.uleb128 0x2
+ 1178 0063 18       		.uleb128 0x18
+ 1179 0064 00       		.byte	0
+ 1180 0065 00       		.byte	0
+ 1181 0066 08       		.uleb128 0x8
+ 1182 0067 2E       		.uleb128 0x2e
+ 1183 0068 01       		.byte	0x1
+ 1184 0069 03       		.uleb128 0x3
+ 1185 006a 0E       		.uleb128 0xe
+ 1186 006b 3A       		.uleb128 0x3a
+ 1187 006c 0B       		.uleb128 0xb
+ 1188 006d 3B       		.uleb128 0x3b
+ 1189 006e 0B       		.uleb128 0xb
+ 1190 006f 27       		.uleb128 0x27
+ 1191 0070 19       		.uleb128 0x19
+ 1192 0071 49       		.uleb128 0x49
+ 1193 0072 13       		.uleb128 0x13
+ 1194 0073 11       		.uleb128 0x11
+ 1195 0074 01       		.uleb128 0x1
+ 1196 0075 12       		.uleb128 0x12
+ 1197 0076 06       		.uleb128 0x6
+ 1198 0077 40       		.uleb128 0x40
+ 1199 0078 18       		.uleb128 0x18
+ 1200 0079 9642     		.uleb128 0x2116
+ 1201 007b 19       		.uleb128 0x19
+ 1202 007c 01       		.uleb128 0x1
+ 1203 007d 13       		.uleb128 0x13
+ 1204 007e 00       		.byte	0
+ 1205 007f 00       		.byte	0
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 37
+
+
+ 1206 0080 09       		.uleb128 0x9
+ 1207 0081 34       		.uleb128 0x34
+ 1208 0082 00       		.byte	0
+ 1209 0083 03       		.uleb128 0x3
+ 1210 0084 0E       		.uleb128 0xe
+ 1211 0085 3A       		.uleb128 0x3a
+ 1212 0086 0B       		.uleb128 0xb
+ 1213 0087 3B       		.uleb128 0x3b
+ 1214 0088 0B       		.uleb128 0xb
+ 1215 0089 49       		.uleb128 0x49
+ 1216 008a 13       		.uleb128 0x13
+ 1217 008b 02       		.uleb128 0x2
+ 1218 008c 18       		.uleb128 0x18
+ 1219 008d 00       		.byte	0
+ 1220 008e 00       		.byte	0
+ 1221 008f 0A       		.uleb128 0xa
+ 1222 0090 2E       		.uleb128 0x2e
+ 1223 0091 01       		.byte	0x1
+ 1224 0092 3F       		.uleb128 0x3f
+ 1225 0093 19       		.uleb128 0x19
+ 1226 0094 03       		.uleb128 0x3
+ 1227 0095 0E       		.uleb128 0xe
+ 1228 0096 3A       		.uleb128 0x3a
+ 1229 0097 0B       		.uleb128 0xb
+ 1230 0098 3B       		.uleb128 0x3b
+ 1231 0099 05       		.uleb128 0x5
+ 1232 009a 27       		.uleb128 0x27
+ 1233 009b 19       		.uleb128 0x19
+ 1234 009c 11       		.uleb128 0x11
+ 1235 009d 01       		.uleb128 0x1
+ 1236 009e 12       		.uleb128 0x12
+ 1237 009f 06       		.uleb128 0x6
+ 1238 00a0 40       		.uleb128 0x40
+ 1239 00a1 18       		.uleb128 0x18
+ 1240 00a2 9642     		.uleb128 0x2116
+ 1241 00a4 19       		.uleb128 0x19
+ 1242 00a5 01       		.uleb128 0x1
+ 1243 00a6 13       		.uleb128 0x13
+ 1244 00a7 00       		.byte	0
+ 1245 00a8 00       		.byte	0
+ 1246 00a9 0B       		.uleb128 0xb
+ 1247 00aa 05       		.uleb128 0x5
+ 1248 00ab 00       		.byte	0
+ 1249 00ac 03       		.uleb128 0x3
+ 1250 00ad 0E       		.uleb128 0xe
+ 1251 00ae 3A       		.uleb128 0x3a
+ 1252 00af 0B       		.uleb128 0xb
+ 1253 00b0 3B       		.uleb128 0x3b
+ 1254 00b1 05       		.uleb128 0x5
+ 1255 00b2 49       		.uleb128 0x49
+ 1256 00b3 13       		.uleb128 0x13
+ 1257 00b4 02       		.uleb128 0x2
+ 1258 00b5 18       		.uleb128 0x18
+ 1259 00b6 00       		.byte	0
+ 1260 00b7 00       		.byte	0
+ 1261 00b8 0C       		.uleb128 0xc
+ 1262 00b9 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 38
+
+
+ 1263 00ba 01       		.byte	0x1
+ 1264 00bb 3F       		.uleb128 0x3f
+ 1265 00bc 19       		.uleb128 0x19
+ 1266 00bd 03       		.uleb128 0x3
+ 1267 00be 0E       		.uleb128 0xe
+ 1268 00bf 3A       		.uleb128 0x3a
+ 1269 00c0 0B       		.uleb128 0xb
+ 1270 00c1 3B       		.uleb128 0x3b
+ 1271 00c2 05       		.uleb128 0x5
+ 1272 00c3 27       		.uleb128 0x27
+ 1273 00c4 19       		.uleb128 0x19
+ 1274 00c5 49       		.uleb128 0x49
+ 1275 00c6 13       		.uleb128 0x13
+ 1276 00c7 11       		.uleb128 0x11
+ 1277 00c8 01       		.uleb128 0x1
+ 1278 00c9 12       		.uleb128 0x12
+ 1279 00ca 06       		.uleb128 0x6
+ 1280 00cb 40       		.uleb128 0x40
+ 1281 00cc 18       		.uleb128 0x18
+ 1282 00cd 9742     		.uleb128 0x2117
+ 1283 00cf 19       		.uleb128 0x19
+ 1284 00d0 01       		.uleb128 0x1
+ 1285 00d1 13       		.uleb128 0x13
+ 1286 00d2 00       		.byte	0
+ 1287 00d3 00       		.byte	0
+ 1288 00d4 0D       		.uleb128 0xd
+ 1289 00d5 34       		.uleb128 0x34
+ 1290 00d6 00       		.byte	0
+ 1291 00d7 03       		.uleb128 0x3
+ 1292 00d8 0E       		.uleb128 0xe
+ 1293 00d9 3A       		.uleb128 0x3a
+ 1294 00da 0B       		.uleb128 0xb
+ 1295 00db 3B       		.uleb128 0x3b
+ 1296 00dc 05       		.uleb128 0x5
+ 1297 00dd 49       		.uleb128 0x49
+ 1298 00de 13       		.uleb128 0x13
+ 1299 00df 02       		.uleb128 0x2
+ 1300 00e0 18       		.uleb128 0x18
+ 1301 00e1 00       		.byte	0
+ 1302 00e2 00       		.byte	0
+ 1303 00e3 0E       		.uleb128 0xe
+ 1304 00e4 2E       		.uleb128 0x2e
+ 1305 00e5 01       		.byte	0x1
+ 1306 00e6 3F       		.uleb128 0x3f
+ 1307 00e7 19       		.uleb128 0x19
+ 1308 00e8 03       		.uleb128 0x3
+ 1309 00e9 0E       		.uleb128 0xe
+ 1310 00ea 3A       		.uleb128 0x3a
+ 1311 00eb 0B       		.uleb128 0xb
+ 1312 00ec 3B       		.uleb128 0x3b
+ 1313 00ed 05       		.uleb128 0x5
+ 1314 00ee 27       		.uleb128 0x27
+ 1315 00ef 19       		.uleb128 0x19
+ 1316 00f0 49       		.uleb128 0x49
+ 1317 00f1 13       		.uleb128 0x13
+ 1318 00f2 11       		.uleb128 0x11
+ 1319 00f3 01       		.uleb128 0x1
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 39
+
+
+ 1320 00f4 12       		.uleb128 0x12
+ 1321 00f5 06       		.uleb128 0x6
+ 1322 00f6 40       		.uleb128 0x40
+ 1323 00f7 18       		.uleb128 0x18
+ 1324 00f8 9642     		.uleb128 0x2116
+ 1325 00fa 19       		.uleb128 0x19
+ 1326 00fb 01       		.uleb128 0x1
+ 1327 00fc 13       		.uleb128 0x13
+ 1328 00fd 00       		.byte	0
+ 1329 00fe 00       		.byte	0
+ 1330 00ff 0F       		.uleb128 0xf
+ 1331 0100 26       		.uleb128 0x26
+ 1332 0101 00       		.byte	0
+ 1333 0102 49       		.uleb128 0x49
+ 1334 0103 13       		.uleb128 0x13
+ 1335 0104 00       		.byte	0
+ 1336 0105 00       		.byte	0
+ 1337 0106 10       		.uleb128 0x10
+ 1338 0107 34       		.uleb128 0x34
+ 1339 0108 00       		.byte	0
+ 1340 0109 03       		.uleb128 0x3
+ 1341 010a 0E       		.uleb128 0xe
+ 1342 010b 3A       		.uleb128 0x3a
+ 1343 010c 0B       		.uleb128 0xb
+ 1344 010d 3B       		.uleb128 0x3b
+ 1345 010e 05       		.uleb128 0x5
+ 1346 010f 49       		.uleb128 0x49
+ 1347 0110 13       		.uleb128 0x13
+ 1348 0111 3F       		.uleb128 0x3f
+ 1349 0112 19       		.uleb128 0x19
+ 1350 0113 3C       		.uleb128 0x3c
+ 1351 0114 19       		.uleb128 0x19
+ 1352 0115 00       		.byte	0
+ 1353 0116 00       		.byte	0
+ 1354 0117 11       		.uleb128 0x11
+ 1355 0118 35       		.uleb128 0x35
+ 1356 0119 00       		.byte	0
+ 1357 011a 49       		.uleb128 0x49
+ 1358 011b 13       		.uleb128 0x13
+ 1359 011c 00       		.byte	0
+ 1360 011d 00       		.byte	0
+ 1361 011e 00       		.byte	0
+ 1362              		.section	.debug_aranges,"",%progbits
+ 1363 0000 64000000 		.4byte	0x64
+ 1364 0004 0200     		.2byte	0x2
+ 1365 0006 00000000 		.4byte	.Ldebug_info0
+ 1366 000a 04       		.byte	0x4
+ 1367 000b 00       		.byte	0
+ 1368 000c 0000     		.2byte	0
+ 1369 000e 0000     		.2byte	0
+ 1370 0010 00000000 		.4byte	.LFB56
+ 1371 0014 64000000 		.4byte	.LFE56-.LFB56
+ 1372 0018 00000000 		.4byte	.LFB57
+ 1373 001c 66000000 		.4byte	.LFE57-.LFB57
+ 1374 0020 00000000 		.4byte	.LFB58
+ 1375 0024 26000000 		.4byte	.LFE58-.LFB58
+ 1376 0028 00000000 		.4byte	.LFB59
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 40
+
+
+ 1377 002c 26000000 		.4byte	.LFE59-.LFB59
+ 1378 0030 00000000 		.4byte	.LFB60
+ 1379 0034 2A000000 		.4byte	.LFE60-.LFB60
+ 1380 0038 00000000 		.4byte	.LFB61
+ 1381 003c 84000000 		.4byte	.LFE61-.LFB61
+ 1382 0040 00000000 		.4byte	.LFB62
+ 1383 0044 68000000 		.4byte	.LFE62-.LFB62
+ 1384 0048 00000000 		.4byte	.LFB63
+ 1385 004c 30000000 		.4byte	.LFE63-.LFB63
+ 1386 0050 00000000 		.4byte	.LFB64
+ 1387 0054 34000000 		.4byte	.LFE64-.LFB64
+ 1388 0058 00000000 		.4byte	.LFB65
+ 1389 005c 32000000 		.4byte	.LFE65-.LFB65
+ 1390 0060 00000000 		.4byte	0
+ 1391 0064 00000000 		.4byte	0
+ 1392              		.section	.debug_ranges,"",%progbits
+ 1393              	.Ldebug_ranges0:
+ 1394 0000 00000000 		.4byte	.LFB56
+ 1395 0004 64000000 		.4byte	.LFE56
+ 1396 0008 00000000 		.4byte	.LFB57
+ 1397 000c 66000000 		.4byte	.LFE57
+ 1398 0010 00000000 		.4byte	.LFB58
+ 1399 0014 26000000 		.4byte	.LFE58
+ 1400 0018 00000000 		.4byte	.LFB59
+ 1401 001c 26000000 		.4byte	.LFE59
+ 1402 0020 00000000 		.4byte	.LFB60
+ 1403 0024 2A000000 		.4byte	.LFE60
+ 1404 0028 00000000 		.4byte	.LFB61
+ 1405 002c 84000000 		.4byte	.LFE61
+ 1406 0030 00000000 		.4byte	.LFB62
+ 1407 0034 68000000 		.4byte	.LFE62
+ 1408 0038 00000000 		.4byte	.LFB63
+ 1409 003c 30000000 		.4byte	.LFE63
+ 1410 0040 00000000 		.4byte	.LFB64
+ 1411 0044 34000000 		.4byte	.LFE64
+ 1412 0048 00000000 		.4byte	.LFB65
+ 1413 004c 32000000 		.4byte	.LFE65
+ 1414 0050 00000000 		.4byte	0
+ 1415 0054 00000000 		.4byte	0
+ 1416              		.section	.debug_line,"",%progbits
+ 1417              	.Ldebug_line0:
+ 1418 0000 92020000 		.section	.debug_str,"MS",%progbits,1
+ 1418      02005201 
+ 1418      00000201 
+ 1418      FB0E0D00 
+ 1418      01010101 
+ 1419              	.LASF22:
+ 1420 0000 46535F4D 		.ascii	"FS_MMC_HW_X_IsWriteProtected\000"
+ 1420      4D435F48 
+ 1420      575F585F 
+ 1420      49735772 
+ 1420      69746550 
+ 1421              	.LASF21:
+ 1422 001d 77705374 		.ascii	"wpState\000"
+ 1422      61746500 
+ 1423              	.LASF11:
+ 1424 0025 5F5F696E 		.ascii	"__int32_t\000"
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 41
+
+
+ 1424      7433325F 
+ 1424      7400
+ 1425              	.LASF15:
+ 1426 002f 646F7562 		.ascii	"double\000"
+ 1426      6C6500
+ 1427              	.LASF39:
+ 1428 0036 433A5C55 		.ascii	"C:\\Users\\pfautley\\Desktop\\finalproject.cydsn\\f"
+ 1428      73657273 
+ 1428      5C706661 
+ 1428      75746C65 
+ 1428      795C4465 
+ 1429 0064 696E616C 		.ascii	"inalproject.cydsn\000"
+ 1429      70726F6A 
+ 1429      6563742E 
+ 1429      63796473 
+ 1429      6E00
+ 1430              	.LASF33:
+ 1431 0076 70446174 		.ascii	"pData\000"
+ 1431      6100
+ 1432              	.LASF14:
+ 1433 007c 666C6F61 		.ascii	"float\000"
+ 1433      7400
+ 1434              	.LASF3:
+ 1435 0082 756E7369 		.ascii	"unsigned char\000"
+ 1435      676E6564 
+ 1435      20636861 
+ 1435      7200
+ 1436              	.LASF23:
+ 1437 0090 46535F4D 		.ascii	"FS_MMC_HW_X_SetMaxSpeed\000"
+ 1437      4D435F48 
+ 1437      575F585F 
+ 1437      5365744D 
+ 1437      61785370 
+ 1438              	.LASF20:
+ 1439 00a8 73706944 		.ascii	"spiData\000"
+ 1439      61746100 
+ 1440              	.LASF0:
+ 1441 00b0 73686F72 		.ascii	"short unsigned int\000"
+ 1441      7420756E 
+ 1441      7369676E 
+ 1441      65642069 
+ 1441      6E7400
+ 1442              	.LASF32:
+ 1443 00c3 46535F4D 		.ascii	"FS_MMC_HW_X_Read\000"
+ 1443      4D435F48 
+ 1443      575F585F 
+ 1443      52656164 
+ 1443      00
+ 1444              	.LASF42:
+ 1445 00d4 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1445      52784275 
+ 1445      66666572 
+ 1445      00
+ 1446              	.LASF1:
+ 1447 00e1 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1447      20756E73 
+ 1447      69676E65 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 42
+
+
+ 1447      6420696E 
+ 1447      7400
+ 1448              	.LASF18:
+ 1449 00f3 46535F4D 		.ascii	"FS_MMC_HW_X_EnableCS\000"
+ 1449      4D435F48 
+ 1449      575F585F 
+ 1449      456E6162 
+ 1449      6C654353 
+ 1450              	.LASF6:
+ 1451 0108 73686F72 		.ascii	"short int\000"
+ 1451      7420696E 
+ 1451      7400
+ 1452              	.LASF26:
+ 1453 0112 64697652 		.ascii	"divResult\000"
+ 1453      6573756C 
+ 1453      7400
+ 1454              	.LASF24:
+ 1455 011c 4D617846 		.ascii	"MaxFreq\000"
+ 1455      72657100 
+ 1456              	.LASF31:
+ 1457 0124 46535F4D 		.ascii	"FS_MMC_HW_X_IsPresent\000"
+ 1457      4D435F48 
+ 1457      575F585F 
+ 1457      49735072 
+ 1457      6573656E 
+ 1458              	.LASF2:
+ 1459 013a 756E7369 		.ascii	"unsigned int\000"
+ 1459      676E6564 
+ 1459      20696E74 
+ 1459      00
+ 1460              	.LASF36:
+ 1461 0147 656D4669 		.ascii	"emFile_1_isInited0\000"
+ 1461      6C655F31 
+ 1461      5F697349 
+ 1461      6E697465 
+ 1461      643000
+ 1462              	.LASF10:
+ 1463 015a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1463      206C6F6E 
+ 1463      6720756E 
+ 1463      7369676E 
+ 1463      65642069 
+ 1464              	.LASF29:
+ 1465 0171 566D6178 		.ascii	"Vmax\000"
+ 1465      00
+ 1466              	.LASF30:
+ 1467 0176 72657375 		.ascii	"result\000"
+ 1467      6C7400
+ 1468              	.LASF37:
+ 1469 017d 474E5520 		.ascii	"GNU C 4.8.4 20140526 (release) [ARM/embedded-4_8-br"
+ 1469      4320342E 
+ 1469      382E3420 
+ 1469      32303134 
+ 1469      30353236 
+ 1470 01b0 616E6368 		.ascii	"anch revision 211358] -mcpu=cortex-m3 -mthumb -g -O"
+ 1470      20726576 
+ 1470      6973696F 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 43
+
+
+ 1470      6E203231 
+ 1470      31333538 
+ 1471 01e3 30202D66 		.ascii	"0 -ffunction-sections\000"
+ 1471      66756E63 
+ 1471      74696F6E 
+ 1471      2D736563 
+ 1471      74696F6E 
+ 1472              	.LASF35:
+ 1473 01f9 46535F4D 		.ascii	"FS_MMC_HW_X_Write\000"
+ 1473      4D435F48 
+ 1473      575F585F 
+ 1473      57726974 
+ 1473      6500
+ 1474              	.LASF12:
+ 1475 020b 696E7433 		.ascii	"int32_t\000"
+ 1475      325F7400 
+ 1476              	.LASF4:
+ 1477 0213 73697A65 		.ascii	"sizetype\000"
+ 1477      74797065 
+ 1477      00
+ 1478              	.LASF9:
+ 1479 021c 6C6F6E67 		.ascii	"long long int\000"
+ 1479      206C6F6E 
+ 1479      6720696E 
+ 1479      7400
+ 1480              	.LASF34:
+ 1481 022a 4E756D42 		.ascii	"NumBytes\000"
+ 1481      79746573 
+ 1481      00
+ 1482              	.LASF5:
+ 1483 0233 63686172 		.ascii	"char\000"
+ 1483      00
+ 1484              	.LASF28:
+ 1485 0238 566D696E 		.ascii	"Vmin\000"
+ 1485      00
+ 1486              	.LASF17:
+ 1487 023d 44617461 		.ascii	"Data\000"
+ 1487      00
+ 1488              	.LASF25:
+ 1489 0242 66726571 		.ascii	"freq\000"
+ 1489      00
+ 1490              	.LASF38:
+ 1491 0247 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\emFile_1_MMC_HW_SPI.c\000"
+ 1491      6E657261 
+ 1491      7465645F 
+ 1491      536F7572 
+ 1491      63655C50 
+ 1492              	.LASF13:
+ 1493 0276 75696E74 		.ascii	"uint8\000"
+ 1493      3800
+ 1494              	.LASF7:
+ 1495 027c 6C6F6E67 		.ascii	"long int\000"
+ 1495      20696E74 
+ 1495      00
+ 1496              	.LASF40:
+ 1497 0285 656D4669 		.ascii	"emFile_1_Init\000"
+ 1497      6C655F31 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccXrjkdR.s 			page 44
+
+
+ 1497      5F496E69 
+ 1497      7400
+ 1498              	.LASF8:
+ 1499 0293 7369676E 		.ascii	"signed char\000"
+ 1499      65642063 
+ 1499      68617200 
+ 1500              	.LASF16:
+ 1501 029f 556E6974 		.ascii	"Unit\000"
+ 1501      00
+ 1502              	.LASF19:
+ 1503 02a4 46535F4D 		.ascii	"FS_MMC_HW_X_DisableCS\000"
+ 1503      4D435F48 
+ 1503      575F585F 
+ 1503      44697361 
+ 1503      626C6543 
+ 1504              	.LASF41:
+ 1505 02ba 656D4669 		.ascii	"emFile_1_ReadWriteSPI\000"
+ 1505      6C655F31 
+ 1505      5F526561 
+ 1505      64577269 
+ 1505      74655350 
+ 1506              	.LASF27:
+ 1507 02d0 46535F4D 		.ascii	"FS_MMC_HW_X_SetVoltage\000"
+ 1507      4D435F48 
+ 1507      575F585F 
+ 1507      53657456 
+ 1507      6F6C7461 
+ 1508              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.4 20140526 (release) [ARM/embedded-4_8-br

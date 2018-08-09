@@ -1,0 +1,1539 @@
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	sdFile
+  19              		.data
+  20              		.align	2
+  21              		.type	sdFile, %object
+  22              		.size	sdFile, 9
+  23              	sdFile:
+  24 0000 46696C65 		.ascii	"File.txt\000"
+  24      2E747874 
+  24      00
+  25 0009 000000   		.section	.rodata
+  26              		.align	2
+  27              	.LC0:
+  28 0000 53746570 		.ascii	"Step#\000"
+  28      2300
+  29              		.section	.text.NextStep,"ax",%progbits
+  30              		.align	2
+  31              		.global	NextStep
+  32              		.thumb
+  33              		.thumb_func
+  34              		.type	NextStep, %function
+  35              	NextStep:
+  36              	.LFB56:
+  37              		.file 1 ".\\main.c"
+   1:.\main.c      **** /*******************************************************************************
+   2:.\main.c      **** * File Name: main.c
+   3:.\main.c      **** *
+   4:.\main.c      **** * Version: 1.10
+   5:.\main.c      **** *
+   6:.\main.c      **** * Description:
+   7:.\main.c      **** *  The example project consists of 5 simple steps. Each of the steps performs 
+   8:.\main.c      **** *  single File System operation. 
+   9:.\main.c      **** *  Step#1: Gets SD card name and displays it on the LCD.
+  10:.\main.c      **** *  Step#2: Performs Format SD operation and displays the status of the format 
+  11:.\main.c      **** *  operation execution.
+  12:.\main.c      **** *  Step#3: Creates directory with the name - "Dir" and displays a status of 
+  13:.\main.c      **** *  directory creation operation.
+  14:.\main.c      **** *  Step#4: Creates a file - "File.txt" in the root directory and writes the 
+  15:.\main.c      **** *  following string to the file -"123456789". Displays a status of operations 
+  16:.\main.c      **** *  execution.
+  17:.\main.c      **** *  Step#5: Copies newly created file ("File.txt") to directory "Dir" with the 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 2
+
+
+  18:.\main.c      **** *  name - "File1.txt". 
+  19:.\main.c      **** *
+  20:.\main.c      **** ********************************************************************************
+  21:.\main.c      **** * Copyright 2011-2012, Cypress Semiconductor Corporation. All rights reserved.
+  22:.\main.c      **** * This software is owned by Cypress Semiconductor Corporation and is protected
+  23:.\main.c      **** * by and subject to worldwide patent and copyright laws and treaties.
+  24:.\main.c      **** * Therefore, you may use this software only as provided in the license agreement
+  25:.\main.c      **** * accompanying the software package from which you obtained this software.
+  26:.\main.c      **** * CYPRESS AND ITS SUPPLIERS MAKE NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+  27:.\main.c      **** * WITH REGARD TO THIS SOFTWARE, INCLUDING, BUT NOT LIMITED TO, NONINFRINGEMENT,
+  28:.\main.c      **** * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+  29:.\main.c      **** *******************************************************************************/
+  30:.\main.c      **** 
+  31:.\main.c      **** #include <device.h>
+  32:.\main.c      **** #include <FS.h>
+  33:.\main.c      **** #include <string.h>
+  34:.\main.c      **** #include <Global.h>
+  35:.\main.c      **** 
+  36:.\main.c      **** 
+  37:.\main.c      **** char sdFile[9] = "File.txt";
+  38:.\main.c      **** 
+  39:.\main.c      **** 
+  40:.\main.c      **** void NextStep(U16 step, char * str)
+  41:.\main.c      **** {
+  38              		.loc 1 41 0
+  39              		.cfi_startproc
+  40              		@ args = 0, pretend = 0, frame = 8
+  41              		@ frame_needed = 1, uses_anonymous_args = 0
+  42 0000 80B5     		push	{r7, lr}
+  43              		.cfi_def_cfa_offset 8
+  44              		.cfi_offset 7, -8
+  45              		.cfi_offset 14, -4
+  46 0002 82B0     		sub	sp, sp, #8
+  47              		.cfi_def_cfa_offset 16
+  48 0004 00AF     		add	r7, sp, #0
+  49              		.cfi_def_cfa_register 7
+  50 0006 0346     		mov	r3, r0
+  51 0008 3960     		str	r1, [r7]
+  52 000a FB80     		strh	r3, [r7, #6]	@ movhi
+  42:.\main.c      ****     /* Clear LCD after previously completed operation */
+  43:.\main.c      ****     LCD_ClearDisplay();
+  53              		.loc 1 43 0
+  54 000c 0120     		movs	r0, #1
+  55 000e FFF7FEFF 		bl	LCD_WriteControl
+  44:.\main.c      ****     
+  45:.\main.c      ****     /* This will display step number on the LCD prior
+  46:.\main.c      ****     * every operation on the SD card.
+  47:.\main.c      ****     */
+  48:.\main.c      ****     LCD_Position(0u, 0u);
+  56              		.loc 1 48 0
+  57 0012 0020     		movs	r0, #0
+  58 0014 0021     		movs	r1, #0
+  59 0016 FFF7FEFF 		bl	LCD_Position
+  49:.\main.c      ****     LCD_PrintString("Step#");
+  60              		.loc 1 49 0
+  61 001a 0C48     		ldr	r0, .L2
+  62 001c FFF7FEFF 		bl	LCD_PrintString
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 3
+
+
+  50:.\main.c      ****     LCD_PrintDecUint16(step);
+  63              		.loc 1 50 0
+  64 0020 FB88     		ldrh	r3, [r7, #6]
+  65 0022 1846     		mov	r0, r3
+  66 0024 FFF7FEFF 		bl	LCD_PrintU32Number
+  51:.\main.c      ****     LCD_Position(1u, 0u);
+  67              		.loc 1 51 0
+  68 0028 0120     		movs	r0, #1
+  69 002a 0021     		movs	r1, #0
+  70 002c FFF7FEFF 		bl	LCD_Position
+  52:.\main.c      ****     LCD_PrintString(str);
+  71              		.loc 1 52 0
+  72 0030 3868     		ldr	r0, [r7]
+  73 0032 FFF7FEFF 		bl	LCD_PrintString
+  53:.\main.c      ****     
+  54:.\main.c      ****     /* Need some delay to make step number visible */
+  55:.\main.c      ****     CyDelay(2000u);
+  74              		.loc 1 55 0
+  75 0036 4FF4FA60 		mov	r0, #2000
+  76 003a FFF7FEFF 		bl	CyDelay
+  56:.\main.c      ****     
+  57:.\main.c      ****     /* Clear LCD after step number was prompted */
+  58:.\main.c      ****     LCD_ClearDisplay();
+  77              		.loc 1 58 0
+  78 003e 0120     		movs	r0, #1
+  79 0040 FFF7FEFF 		bl	LCD_WriteControl
+  59:.\main.c      **** }
+  80              		.loc 1 59 0
+  81 0044 0837     		adds	r7, r7, #8
+  82 0046 BD46     		mov	sp, r7
+  83              		@ sp needed
+  84 0048 80BD     		pop	{r7, pc}
+  85              	.L3:
+  86 004a 00BF     		.align	2
+  87              	.L2:
+  88 004c 00000000 		.word	.LC0
+  89              		.cfi_endproc
+  90              	.LFE56:
+  91              		.size	NextStep, .-NextStep
+  92              		.section	.rodata
+  93 0006 0000     		.align	2
+  94              	.LC1:
+  95 0008 53442043 		.ascii	"SD CARD NAME\000"
+  95      41524420 
+  95      4E414D45 
+  95      00
+  96 0015 000000   		.align	2
+  97              	.LC2:
+  98 0018 53442063 		.ascii	"SD card name:\000"
+  98      61726420 
+  98      6E616D65 
+  98      3A00
+  99 0026 0000     		.align	2
+ 100              	.LC3:
+ 101 0028 4661696C 		.ascii	"Failed to get\000"
+ 101      65642074 
+ 101      6F206765 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 4
+
+
+ 101      7400
+ 102 0036 0000     		.align	2
+ 103              	.LC4:
+ 104 0038 53442063 		.ascii	"SD card name\000"
+ 104      61726420 
+ 104      6E616D65 
+ 104      00
+ 105 0045 000000   		.align	2
+ 106              	.LC5:
+ 107 0048 53442043 		.ascii	"SD CARD FORMAT\000"
+ 107      41524420 
+ 107      464F524D 
+ 107      415400
+ 108 0057 00       		.align	2
+ 109              	.LC6:
+ 110 0058 53442063 		.ascii	"SD card format\000"
+ 110      61726420 
+ 110      666F726D 
+ 110      617400
+ 111 0067 00       		.align	2
+ 112              	.LC7:
+ 113 0068 53756363 		.ascii	"Succeeded\000"
+ 113      65656465 
+ 113      6400
+ 114 0072 0000     		.align	2
+ 115              	.LC8:
+ 116 0074 4661696C 		.ascii	"Failed\000"
+ 116      656400
+ 117 007b 00       		.align	2
+ 118              	.LC9:
+ 119 007c 44495245 		.ascii	"DIRECTORY\000"
+ 119      43544F52 
+ 119      5900
+ 120 0086 0000     		.align	2
+ 121              	.LC10:
+ 122 0088 44697200 		.ascii	"Dir\000"
+ 123              		.align	2
+ 124              	.LC11:
+ 125 008c 22446972 		.ascii	"\"Dir\" created\000"
+ 125      22206372 
+ 125      65617465 
+ 125      6400
+ 126 009a 0000     		.align	2
+ 127              	.LC12:
+ 128 009c 4661696C 		.ascii	"Failed to create\000"
+ 128      65642074 
+ 128      6F206372 
+ 128      65617465 
+ 128      00
+ 129 00ad 000000   		.align	2
+ 130              	.LC13:
+ 131 00b0 64697265 		.ascii	"directory\000"
+ 131      63746F72 
+ 131      7900
+ 132 00ba 0000     		.align	2
+ 133              	.LC14:
+ 134 00bc 46494C45 		.ascii	"FILE\000"
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 5
+
+
+ 134      00
+ 135 00c1 000000   		.align	2
+ 136              	.LC15:
+ 137 00c4 7700     		.ascii	"w\000"
+ 138 00c6 0000     		.align	2
+ 139              	.LC16:
+ 140 00c8 46696C65 		.ascii	"File \000"
+ 140      2000
+ 141 00ce 0000     		.align	2
+ 142              	.LC17:
+ 143 00d0 77617320 		.ascii	"was opened\000"
+ 143      6F70656E 
+ 143      656400
+ 144 00db 00       		.align	2
+ 145              	.LC18:
+ 146 00dc 30313233 		.ascii	"0123456789\000"
+ 146      34353637 
+ 146      383900
+ 147 00e7 00       		.align	2
+ 148              	.LC19:
+ 149 00e8 22303132 		.ascii	"\"0123456789\"\000"
+ 149      33343536 
+ 149      37383922 
+ 149      00
+ 150 00f5 000000   		.align	2
+ 151              	.LC20:
+ 152 00f8 77726974 		.ascii	"written to file\000"
+ 152      74656E20 
+ 152      746F2066 
+ 152      696C6500 
+ 153              		.align	2
+ 154              	.LC21:
+ 155 0108 4661696C 		.ascii	"Failed to write\000"
+ 155      65642074 
+ 155      6F207772 
+ 155      69746500 
+ 156              		.align	2
+ 157              	.LC22:
+ 158 0118 64617461 		.ascii	"data to file\000"
+ 158      20746F20 
+ 158      66696C65 
+ 158      00
+ 159 0125 000000   		.align	2
+ 160              	.LC23:
+ 161 0128 46696C65 		.ascii	"File was closed\000"
+ 161      20776173 
+ 161      20636C6F 
+ 161      73656400 
+ 162              		.align	2
+ 163              	.LC24:
+ 164 0138 4661696C 		.ascii	"Failed to close\000"
+ 164      65642074 
+ 164      6F20636C 
+ 164      6F736500 
+ 165              		.align	2
+ 166              	.LC25:
+ 167 0148 66696C65 		.ascii	"file\000"
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 6
+
+
+ 167      00
+ 168 014d 000000   		.align	2
+ 169              	.LC26:
+ 170 0150 434F5059 		.ascii	"COPY\000"
+ 170      00
+ 171 0155 000000   		.align	2
+ 172              	.LC27:
+ 173 0158 5C446972 		.ascii	"\\Dir\\file1.txt\000"
+ 173      5C66696C 
+ 173      65312E74 
+ 173      787400
+ 174 0167 00       		.align	2
+ 175              	.LC28:
+ 176 0168 46696C65 		.ascii	"File was \000"
+ 176      20776173 
+ 176      2000
+ 177 0172 0000     		.align	2
+ 178              	.LC29:
+ 179 0174 636F7069 		.ascii	"copied to \"DIR\"\000"
+ 179      65642074 
+ 179      6F202244 
+ 179      49522200 
+ 180              		.align	2
+ 181              	.LC30:
+ 182 0184 4661696C 		.ascii	"Failed to copy\000"
+ 182      65642074 
+ 182      6F20636F 
+ 182      707900
+ 183 0193 00       		.align	2
+ 184              	.LC31:
+ 185 0194 4578616D 		.ascii	"Example project\000"
+ 185      706C6520 
+ 185      70726F6A 
+ 185      65637400 
+ 186              		.align	2
+ 187              	.LC32:
+ 188 01a4 636F6D70 		.ascii	"completed\000"
+ 188      6C657465 
+ 188      6400
+ 189 01ae 0000     		.section	.text.main,"ax",%progbits
+ 190              		.align	2
+ 191              		.global	main
+ 192              		.thumb
+ 193              		.thumb_func
+ 194              		.type	main, %function
+ 195              	main:
+ 196              	.LFB57:
+  60:.\main.c      **** 
+  61:.\main.c      **** void main()
+  62:.\main.c      **** {
+ 197              		.loc 1 62 0
+ 198              		.cfi_startproc
+ 199              		@ args = 0, pretend = 0, frame = 24
+ 200              		@ frame_needed = 1, uses_anonymous_args = 0
+ 201 0000 80B5     		push	{r7, lr}
+ 202              		.cfi_def_cfa_offset 8
+ 203              		.cfi_offset 7, -8
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 7
+
+
+ 204              		.cfi_offset 14, -4
+ 205 0002 86B0     		sub	sp, sp, #24
+ 206              		.cfi_def_cfa_offset 32
+ 207 0004 00AF     		add	r7, sp, #0
+ 208              		.cfi_def_cfa_register 7
+  63:.\main.c      ****     char sdVolName[10];     /* Buffer that will hold SD card Volume name */
+  64:.\main.c      ****     U16 step = 1u;
+ 209              		.loc 1 64 0
+ 210 0006 0123     		movs	r3, #1
+ 211 0008 FB82     		strh	r3, [r7, #22]	@ movhi
+  65:.\main.c      ****     FS_FILE * pFile;
+  66:.\main.c      ****     
+  67:.\main.c      ****     /* Start LCD */
+  68:.\main.c      ****     LCD_Start();
+ 212              		.loc 1 68 0
+ 213 000a FFF7FEFF 		bl	LCD_Start
+  69:.\main.c      ****     
+  70:.\main.c      ****     /* Initialize file system */
+  71:.\main.c      ****     FS_Init();
+ 214              		.loc 1 71 0
+ 215 000e FFF7FEFF 		bl	FS_Init
+  72:.\main.c      ****     
+  73:.\main.c      ****     /* Display step number */
+  74:.\main.c      ****     NextStep(step++, "SD CARD NAME");
+ 216              		.loc 1 74 0
+ 217 0012 FB8A     		ldrh	r3, [r7, #22]
+ 218 0014 5A1C     		adds	r2, r3, #1
+ 219 0016 FA82     		strh	r2, [r7, #22]	@ movhi
+ 220 0018 1846     		mov	r0, r3
+ 221 001a 9749     		ldr	r1, .L20
+ 222 001c FFF7FEFF 		bl	NextStep
+  75:.\main.c      ****     
+  76:.\main.c      ****     LCD_Position(0u, 0u);
+ 223              		.loc 1 76 0
+ 224 0020 0020     		movs	r0, #0
+ 225 0022 0021     		movs	r1, #0
+ 226 0024 FFF7FEFF 		bl	LCD_Position
+  77:.\main.c      ****     
+  78:.\main.c      ****     /* Get volume name of SD card #0 */
+  79:.\main.c      ****     if(0 != FS_GetVolumeName(0u, &sdVolName[0], 9u))
+ 227              		.loc 1 79 0
+ 228 0028 3B1D     		adds	r3, r7, #4
+ 229 002a 0020     		movs	r0, #0
+ 230 002c 1946     		mov	r1, r3
+ 231 002e 0922     		movs	r2, #9
+ 232 0030 FFF7FEFF 		bl	FS_GetVolumeName
+ 233 0034 0346     		mov	r3, r0
+ 234 0036 002B     		cmp	r3, #0
+ 235 0038 0BD0     		beq	.L5
+  80:.\main.c      ****     {
+  81:.\main.c      ****         /* Getting volume name succeeded so prompt it on the LCD */
+  82:.\main.c      ****         LCD_PrintString("SD card name:");
+ 236              		.loc 1 82 0
+ 237 003a 9048     		ldr	r0, .L20+4
+ 238 003c FFF7FEFF 		bl	LCD_PrintString
+  83:.\main.c      ****         LCD_Position(1u, 0u);
+ 239              		.loc 1 83 0
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 8
+
+
+ 240 0040 0120     		movs	r0, #1
+ 241 0042 0021     		movs	r1, #0
+ 242 0044 FFF7FEFF 		bl	LCD_Position
+  84:.\main.c      ****         LCD_PrintString(sdVolName);
+ 243              		.loc 1 84 0
+ 244 0048 3B1D     		adds	r3, r7, #4
+ 245 004a 1846     		mov	r0, r3
+ 246 004c FFF7FEFF 		bl	LCD_PrintString
+ 247 0050 09E0     		b	.L6
+ 248              	.L5:
+  85:.\main.c      ****     }
+  86:.\main.c      ****     else
+  87:.\main.c      ****     {
+  88:.\main.c      ****         /* Operation Failed - indicate this */
+  89:.\main.c      ****         LCD_PrintString("Failed to get");
+ 249              		.loc 1 89 0
+ 250 0052 8B48     		ldr	r0, .L20+8
+ 251 0054 FFF7FEFF 		bl	LCD_PrintString
+  90:.\main.c      ****         LCD_Position(1u, 0u);
+ 252              		.loc 1 90 0
+ 253 0058 0120     		movs	r0, #1
+ 254 005a 0021     		movs	r1, #0
+ 255 005c FFF7FEFF 		bl	LCD_Position
+  91:.\main.c      ****         LCD_PrintString("SD card name");
+ 256              		.loc 1 91 0
+ 257 0060 8848     		ldr	r0, .L20+12
+ 258 0062 FFF7FEFF 		bl	LCD_PrintString
+ 259              	.L6:
+  92:.\main.c      ****     }
+  93:.\main.c      ****     
+  94:.\main.c      ****     /* Need some delay to indicate output on the LCD */
+  95:.\main.c      ****     CyDelay(2000u);
+ 260              		.loc 1 95 0
+ 261 0066 4FF4FA60 		mov	r0, #2000
+ 262 006a FFF7FEFF 		bl	CyDelay
+  96:.\main.c      ****     
+  97:.\main.c      ****     NextStep(step++, "SD CARD FORMAT");
+ 263              		.loc 1 97 0
+ 264 006e FB8A     		ldrh	r3, [r7, #22]
+ 265 0070 5A1C     		adds	r2, r3, #1
+ 266 0072 FA82     		strh	r2, [r7, #22]	@ movhi
+ 267 0074 1846     		mov	r0, r3
+ 268 0076 8449     		ldr	r1, .L20+16
+ 269 0078 FFF7FEFF 		bl	NextStep
+  98:.\main.c      ****         
+  99:.\main.c      ****     LCD_Position(0u, 0u);
+ 270              		.loc 1 99 0
+ 271 007c 0020     		movs	r0, #0
+ 272 007e 0021     		movs	r1, #0
+ 273 0080 FFF7FEFF 		bl	LCD_Position
+ 100:.\main.c      ****     LCD_PrintString("SD card format");
+ 274              		.loc 1 100 0
+ 275 0084 8148     		ldr	r0, .L20+20
+ 276 0086 FFF7FEFF 		bl	LCD_PrintString
+ 101:.\main.c      ****     
+ 102:.\main.c      ****     if(0 == FS_FormatSD(sdVolName))
+ 277              		.loc 1 102 0
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 9
+
+
+ 278 008a 3B1D     		adds	r3, r7, #4
+ 279 008c 1846     		mov	r0, r3
+ 280 008e FFF7FEFF 		bl	FS_FormatSD
+ 281 0092 0346     		mov	r3, r0
+ 282 0094 002B     		cmp	r3, #0
+ 283 0096 07D1     		bne	.L7
+ 103:.\main.c      ****     {
+ 104:.\main.c      ****         LCD_Position(1u, 0u);
+ 284              		.loc 1 104 0
+ 285 0098 0120     		movs	r0, #1
+ 286 009a 0021     		movs	r1, #0
+ 287 009c FFF7FEFF 		bl	LCD_Position
+ 105:.\main.c      ****         LCD_PrintString("Succeeded");
+ 288              		.loc 1 105 0
+ 289 00a0 7B48     		ldr	r0, .L20+24
+ 290 00a2 FFF7FEFF 		bl	LCD_PrintString
+ 291 00a6 06E0     		b	.L8
+ 292              	.L7:
+ 106:.\main.c      ****     }
+ 107:.\main.c      ****     else
+ 108:.\main.c      ****     {
+ 109:.\main.c      ****         LCD_Position(1u, 0u);
+ 293              		.loc 1 109 0
+ 294 00a8 0120     		movs	r0, #1
+ 295 00aa 0021     		movs	r1, #0
+ 296 00ac FFF7FEFF 		bl	LCD_Position
+ 110:.\main.c      ****         LCD_PrintString("Failed");
+ 297              		.loc 1 110 0
+ 298 00b0 7848     		ldr	r0, .L20+28
+ 299 00b2 FFF7FEFF 		bl	LCD_PrintString
+ 300              	.L8:
+ 111:.\main.c      ****     }
+ 112:.\main.c      ****     
+ 113:.\main.c      ****     /* Need some delay to indicate output on the LCD */
+ 114:.\main.c      ****     CyDelay(2000u);
+ 301              		.loc 1 114 0
+ 302 00b6 4FF4FA60 		mov	r0, #2000
+ 303 00ba FFF7FEFF 		bl	CyDelay
+ 115:.\main.c      ****     
+ 116:.\main.c      ****     NextStep(step++, "DIRECTORY");
+ 304              		.loc 1 116 0
+ 305 00be FB8A     		ldrh	r3, [r7, #22]
+ 306 00c0 5A1C     		adds	r2, r3, #1
+ 307 00c2 FA82     		strh	r2, [r7, #22]	@ movhi
+ 308 00c4 1846     		mov	r0, r3
+ 309 00c6 7449     		ldr	r1, .L20+32
+ 310 00c8 FFF7FEFF 		bl	NextStep
+ 117:.\main.c      ****     
+ 118:.\main.c      ****     LCD_Position(0u, 0u);
+ 311              		.loc 1 118 0
+ 312 00cc 0020     		movs	r0, #0
+ 313 00ce 0021     		movs	r1, #0
+ 314 00d0 FFF7FEFF 		bl	LCD_Position
+ 119:.\main.c      ****     
+ 120:.\main.c      ****     /* This will create directory "Dir" on SD card */
+ 121:.\main.c      ****     if(0 == FS_MkDir("Dir"))
+ 315              		.loc 1 121 0
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 10
+
+
+ 316 00d4 7148     		ldr	r0, .L20+36
+ 317 00d6 FFF7FEFF 		bl	FS_MkDir
+ 318 00da 0346     		mov	r3, r0
+ 319 00dc 002B     		cmp	r3, #0
+ 320 00de 03D1     		bne	.L9
+ 122:.\main.c      ****     {
+ 123:.\main.c      ****         /* Display successful directory creation message */
+ 124:.\main.c      ****         LCD_PrintString("\"Dir\" created");
+ 321              		.loc 1 124 0
+ 322 00e0 6F48     		ldr	r0, .L20+40
+ 323 00e2 FFF7FEFF 		bl	LCD_PrintString
+ 324 00e6 09E0     		b	.L10
+ 325              	.L9:
+ 125:.\main.c      ****     }
+ 126:.\main.c      ****     else
+ 127:.\main.c      ****     {
+ 128:.\main.c      ****         /* Display failure message */
+ 129:.\main.c      ****         LCD_PrintString("Failed to create");
+ 326              		.loc 1 129 0
+ 327 00e8 6E48     		ldr	r0, .L20+44
+ 328 00ea FFF7FEFF 		bl	LCD_PrintString
+ 130:.\main.c      ****         LCD_Position(1u, 0u);
+ 329              		.loc 1 130 0
+ 330 00ee 0120     		movs	r0, #1
+ 331 00f0 0021     		movs	r1, #0
+ 332 00f2 FFF7FEFF 		bl	LCD_Position
+ 131:.\main.c      ****         LCD_PrintString("directory");
+ 333              		.loc 1 131 0
+ 334 00f6 6C48     		ldr	r0, .L20+48
+ 335 00f8 FFF7FEFF 		bl	LCD_PrintString
+ 336              	.L10:
+ 132:.\main.c      ****     }
+ 133:.\main.c      ****     
+ 134:.\main.c      ****     /* Need some delay to indicate output on the LCD */
+ 135:.\main.c      ****     CyDelay(2000u);
+ 337              		.loc 1 135 0
+ 338 00fc 4FF4FA60 		mov	r0, #2000
+ 339 0100 FFF7FEFF 		bl	CyDelay
+ 136:.\main.c      ****     
+ 137:.\main.c      ****     NextStep(step++, "FILE");
+ 340              		.loc 1 137 0
+ 341 0104 FB8A     		ldrh	r3, [r7, #22]
+ 342 0106 5A1C     		adds	r2, r3, #1
+ 343 0108 FA82     		strh	r2, [r7, #22]	@ movhi
+ 344 010a 1846     		mov	r0, r3
+ 345 010c 6749     		ldr	r1, .L20+52
+ 346 010e FFF7FEFF 		bl	NextStep
+ 138:.\main.c      ****     
+ 139:.\main.c      ****     /* Create specific file for modification */
+ 140:.\main.c      ****     pFile = FS_FOpen(sdFile, "w");
+ 347              		.loc 1 140 0
+ 348 0112 6748     		ldr	r0, .L20+56
+ 349 0114 6749     		ldr	r1, .L20+60
+ 350 0116 FFF7FEFF 		bl	FS_FOpen
+ 351 011a 3861     		str	r0, [r7, #16]
+ 141:.\main.c      ****     
+ 142:.\main.c      ****     LCD_Position(0u, 0u);
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 11
+
+
+ 352              		.loc 1 142 0
+ 353 011c 0020     		movs	r0, #0
+ 354 011e 0021     		movs	r1, #0
+ 355 0120 FFF7FEFF 		bl	LCD_Position
+ 143:.\main.c      ****     
+ 144:.\main.c      ****     /* Check if file was created */
+ 145:.\main.c      ****     if(pFile)
+ 356              		.loc 1 145 0
+ 357 0124 3B69     		ldr	r3, [r7, #16]
+ 358 0126 002B     		cmp	r3, #0
+ 359 0128 57D0     		beq	.L11
+ 146:.\main.c      ****     {
+ 147:.\main.c      ****         /* Indicate successful file creation message */
+ 148:.\main.c      ****         LCD_PrintString("File ");
+ 360              		.loc 1 148 0
+ 361 012a 6348     		ldr	r0, .L20+64
+ 362 012c FFF7FEFF 		bl	LCD_PrintString
+ 149:.\main.c      ****         LCD_PrintString(sdFile);
+ 363              		.loc 1 149 0
+ 364 0130 5F48     		ldr	r0, .L20+56
+ 365 0132 FFF7FEFF 		bl	LCD_PrintString
+ 150:.\main.c      ****         LCD_Position(1u, 0u);
+ 366              		.loc 1 150 0
+ 367 0136 0120     		movs	r0, #1
+ 368 0138 0021     		movs	r1, #0
+ 369 013a FFF7FEFF 		bl	LCD_Position
+ 151:.\main.c      ****         LCD_PrintString("was opened");
+ 370              		.loc 1 151 0
+ 371 013e 5F48     		ldr	r0, .L20+68
+ 372 0140 FFF7FEFF 		bl	LCD_PrintString
+ 152:.\main.c      ****         
+ 153:.\main.c      ****         /* Need some delay to indicate output on the LCD */
+ 154:.\main.c      ****         CyDelay(2000u);
+ 373              		.loc 1 154 0
+ 374 0144 4FF4FA60 		mov	r0, #2000
+ 375 0148 FFF7FEFF 		bl	CyDelay
+ 155:.\main.c      ****         
+ 156:.\main.c      ****         LCD_ClearDisplay();
+ 376              		.loc 1 156 0
+ 377 014c 0120     		movs	r0, #1
+ 378 014e FFF7FEFF 		bl	LCD_WriteControl
+ 157:.\main.c      ****         
+ 158:.\main.c      ****         LCD_Position(0u, 0u);
+ 379              		.loc 1 158 0
+ 380 0152 0020     		movs	r0, #0
+ 381 0154 0021     		movs	r1, #0
+ 382 0156 FFF7FEFF 		bl	LCD_Position
+ 159:.\main.c      ****         
+ 160:.\main.c      ****         if(0 != FS_Write(pFile, "0123456789", 10u)) 
+ 383              		.loc 1 160 0
+ 384 015a 3869     		ldr	r0, [r7, #16]
+ 385 015c 5849     		ldr	r1, .L20+72
+ 386 015e 0A22     		movs	r2, #10
+ 387 0160 FFF7FEFF 		bl	FS_Write
+ 388 0164 0346     		mov	r3, r0
+ 389 0166 002B     		cmp	r3, #0
+ 390 0168 0DD0     		beq	.L12
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 12
+
+
+ 161:.\main.c      ****         {
+ 162:.\main.c      ****             /* Inditate that data was written to a file */
+ 163:.\main.c      ****             LCD_PrintString("\"0123456789\"");
+ 391              		.loc 1 163 0
+ 392 016a 5648     		ldr	r0, .L20+76
+ 393 016c FFF7FEFF 		bl	LCD_PrintString
+ 164:.\main.c      ****             LCD_PrintString(sdFile);
+ 394              		.loc 1 164 0
+ 395 0170 4F48     		ldr	r0, .L20+56
+ 396 0172 FFF7FEFF 		bl	LCD_PrintString
+ 165:.\main.c      ****             LCD_Position(1u, 0u);
+ 397              		.loc 1 165 0
+ 398 0176 0120     		movs	r0, #1
+ 399 0178 0021     		movs	r1, #0
+ 400 017a FFF7FEFF 		bl	LCD_Position
+ 166:.\main.c      ****             LCD_PrintString("written to file");
+ 401              		.loc 1 166 0
+ 402 017e 5248     		ldr	r0, .L20+80
+ 403 0180 FFF7FEFF 		bl	LCD_PrintString
+ 404 0184 09E0     		b	.L13
+ 405              	.L12:
+ 167:.\main.c      ****         }
+ 168:.\main.c      ****         else
+ 169:.\main.c      ****         {
+ 170:.\main.c      ****             LCD_PrintString("Failed to write");
+ 406              		.loc 1 170 0
+ 407 0186 5148     		ldr	r0, .L20+84
+ 408 0188 FFF7FEFF 		bl	LCD_PrintString
+ 171:.\main.c      ****             LCD_Position(1u, 0u);
+ 409              		.loc 1 171 0
+ 410 018c 0120     		movs	r0, #1
+ 411 018e 0021     		movs	r1, #0
+ 412 0190 FFF7FEFF 		bl	LCD_Position
+ 172:.\main.c      ****             LCD_PrintString("data to file");
+ 413              		.loc 1 172 0
+ 414 0194 4E48     		ldr	r0, .L20+88
+ 415 0196 FFF7FEFF 		bl	LCD_PrintString
+ 416              	.L13:
+ 173:.\main.c      ****         }
+ 174:.\main.c      ****         
+ 175:.\main.c      ****         /* Need some delay to indicate output on the LCD */
+ 176:.\main.c      ****         CyDelay(2000u);
+ 417              		.loc 1 176 0
+ 418 019a 4FF4FA60 		mov	r0, #2000
+ 419 019e FFF7FEFF 		bl	CyDelay
+ 177:.\main.c      ****         
+ 178:.\main.c      ****         LCD_ClearDisplay();
+ 420              		.loc 1 178 0
+ 421 01a2 0120     		movs	r0, #1
+ 422 01a4 FFF7FEFF 		bl	LCD_WriteControl
+ 179:.\main.c      ****         
+ 180:.\main.c      ****         LCD_Position(0u, 0u);
+ 423              		.loc 1 180 0
+ 424 01a8 0020     		movs	r0, #0
+ 425 01aa 0021     		movs	r1, #0
+ 426 01ac FFF7FEFF 		bl	LCD_Position
+ 181:.\main.c      ****         
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 13
+
+
+ 182:.\main.c      ****         if(0 == FS_FClose(pFile))
+ 427              		.loc 1 182 0
+ 428 01b0 3869     		ldr	r0, [r7, #16]
+ 429 01b2 FFF7FEFF 		bl	FS_FClose
+ 430 01b6 0346     		mov	r3, r0
+ 431 01b8 002B     		cmp	r3, #0
+ 432 01ba 03D1     		bne	.L14
+ 183:.\main.c      ****         {
+ 184:.\main.c      ****             LCD_PrintString("File was closed");
+ 433              		.loc 1 184 0
+ 434 01bc 4548     		ldr	r0, .L20+92
+ 435 01be FFF7FEFF 		bl	LCD_PrintString
+ 436 01c2 14E0     		b	.L16
+ 437              	.L14:
+ 185:.\main.c      ****         }
+ 186:.\main.c      ****         else
+ 187:.\main.c      ****         {
+ 188:.\main.c      ****             LCD_PrintString("Failed to close");
+ 438              		.loc 1 188 0
+ 439 01c4 4448     		ldr	r0, .L20+96
+ 440 01c6 FFF7FEFF 		bl	LCD_PrintString
+ 189:.\main.c      ****             LCD_Position(1u, 0u);
+ 441              		.loc 1 189 0
+ 442 01ca 0120     		movs	r0, #1
+ 443 01cc 0021     		movs	r1, #0
+ 444 01ce FFF7FEFF 		bl	LCD_Position
+ 190:.\main.c      ****             LCD_PrintString("file");
+ 445              		.loc 1 190 0
+ 446 01d2 4248     		ldr	r0, .L20+100
+ 447 01d4 FFF7FEFF 		bl	LCD_PrintString
+ 448 01d8 09E0     		b	.L16
+ 449              	.L11:
+ 191:.\main.c      ****         }
+ 192:.\main.c      ****     }
+ 193:.\main.c      ****     else
+ 194:.\main.c      ****     {
+ 195:.\main.c      ****         LCD_PrintString("Failed to create");
+ 450              		.loc 1 195 0
+ 451 01da 3248     		ldr	r0, .L20+44
+ 452 01dc FFF7FEFF 		bl	LCD_PrintString
+ 196:.\main.c      ****         LCD_Position(1u, 0u);
+ 453              		.loc 1 196 0
+ 454 01e0 0120     		movs	r0, #1
+ 455 01e2 0021     		movs	r1, #0
+ 456 01e4 FFF7FEFF 		bl	LCD_Position
+ 197:.\main.c      ****         LCD_PrintString("file");
+ 457              		.loc 1 197 0
+ 458 01e8 3C48     		ldr	r0, .L20+100
+ 459 01ea FFF7FEFF 		bl	LCD_PrintString
+ 460              	.L16:
+ 198:.\main.c      ****     }
+ 199:.\main.c      ****     
+ 200:.\main.c      ****     /* Need some delay to indicate output on the LCD */
+ 201:.\main.c      ****     CyDelay(2000u);
+ 461              		.loc 1 201 0
+ 462 01ee 4FF4FA60 		mov	r0, #2000
+ 463 01f2 FFF7FEFF 		bl	CyDelay
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 14
+
+
+ 202:.\main.c      ****         
+ 203:.\main.c      ****     LCD_ClearDisplay();
+ 464              		.loc 1 203 0
+ 465 01f6 0120     		movs	r0, #1
+ 466 01f8 FFF7FEFF 		bl	LCD_WriteControl
+ 204:.\main.c      ****     
+ 205:.\main.c      ****     NextStep(step++, "COPY");
+ 467              		.loc 1 205 0
+ 468 01fc FB8A     		ldrh	r3, [r7, #22]
+ 469 01fe 5A1C     		adds	r2, r3, #1
+ 470 0200 FA82     		strh	r2, [r7, #22]	@ movhi
+ 471 0202 1846     		mov	r0, r3
+ 472 0204 3649     		ldr	r1, .L20+104
+ 473 0206 FFF7FEFF 		bl	NextStep
+ 206:.\main.c      ****     
+ 207:.\main.c      ****     LCD_Position(0u, 0u);
+ 474              		.loc 1 207 0
+ 475 020a 0020     		movs	r0, #0
+ 476 020c 0021     		movs	r1, #0
+ 477 020e FFF7FEFF 		bl	LCD_Position
+ 208:.\main.c      ****     
+ 209:.\main.c      ****     /* Copy a file to a previously created directory */
+ 210:.\main.c      ****     if(0 == FS_CopyFile(sdFile, "\\Dir\\file1.txt"))
+ 478              		.loc 1 210 0
+ 479 0212 2748     		ldr	r0, .L20+56
+ 480 0214 3349     		ldr	r1, .L20+108
+ 481 0216 FFF7FEFF 		bl	FS_CopyFile
+ 482 021a 0346     		mov	r3, r0
+ 483 021c 002B     		cmp	r3, #0
+ 484 021e 0AD1     		bne	.L17
+ 211:.\main.c      ****     {
+ 212:.\main.c      ****         LCD_PrintString("File was ");
+ 485              		.loc 1 212 0
+ 486 0220 3148     		ldr	r0, .L20+112
+ 487 0222 FFF7FEFF 		bl	LCD_PrintString
+ 213:.\main.c      ****         LCD_Position(1u, 0u);
+ 488              		.loc 1 213 0
+ 489 0226 0120     		movs	r0, #1
+ 490 0228 0021     		movs	r1, #0
+ 491 022a FFF7FEFF 		bl	LCD_Position
+ 214:.\main.c      ****         LCD_PrintString("copied to \"DIR\"");
+ 492              		.loc 1 214 0
+ 493 022e 2F48     		ldr	r0, .L20+116
+ 494 0230 FFF7FEFF 		bl	LCD_PrintString
+ 495 0234 09E0     		b	.L18
+ 496              	.L17:
+ 215:.\main.c      ****     }
+ 216:.\main.c      ****     else
+ 217:.\main.c      ****     {
+ 218:.\main.c      ****         LCD_PrintString("Failed to copy");
+ 497              		.loc 1 218 0
+ 498 0236 2E48     		ldr	r0, .L20+120
+ 499 0238 FFF7FEFF 		bl	LCD_PrintString
+ 219:.\main.c      ****         LCD_Position(1u, 0u);
+ 500              		.loc 1 219 0
+ 501 023c 0120     		movs	r0, #1
+ 502 023e 0021     		movs	r1, #0
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 15
+
+
+ 503 0240 FFF7FEFF 		bl	LCD_Position
+ 220:.\main.c      ****         LCD_PrintString("file");
+ 504              		.loc 1 220 0
+ 505 0244 2548     		ldr	r0, .L20+100
+ 506 0246 FFF7FEFF 		bl	LCD_PrintString
+ 507              	.L18:
+ 221:.\main.c      ****     }
+ 222:.\main.c      ****     
+ 223:.\main.c      ****     /* Need some delay to indicate output on the LCD */
+ 224:.\main.c      ****     CyDelay(2000);
+ 508              		.loc 1 224 0
+ 509 024a 4FF4FA60 		mov	r0, #2000
+ 510 024e FFF7FEFF 		bl	CyDelay
+ 225:.\main.c      ****     
+ 226:.\main.c      ****     LCD_ClearDisplay();
+ 511              		.loc 1 226 0
+ 512 0252 0120     		movs	r0, #1
+ 513 0254 FFF7FEFF 		bl	LCD_WriteControl
+ 227:.\main.c      ****     
+ 228:.\main.c      ****     LCD_Position(0u, 0u);
+ 514              		.loc 1 228 0
+ 515 0258 0020     		movs	r0, #0
+ 516 025a 0021     		movs	r1, #0
+ 517 025c FFF7FEFF 		bl	LCD_Position
+ 229:.\main.c      ****     LCD_PrintString("Example project");
+ 518              		.loc 1 229 0
+ 519 0260 2448     		ldr	r0, .L20+124
+ 520 0262 FFF7FEFF 		bl	LCD_PrintString
+ 230:.\main.c      ****     LCD_Position(1u, 0u);
+ 521              		.loc 1 230 0
+ 522 0266 0120     		movs	r0, #1
+ 523 0268 0021     		movs	r1, #0
+ 524 026a FFF7FEFF 		bl	LCD_Position
+ 231:.\main.c      ****     LCD_PrintString("completed");
+ 525              		.loc 1 231 0
+ 526 026e 2248     		ldr	r0, .L20+128
+ 527 0270 FFF7FEFF 		bl	LCD_PrintString
+ 528              	.L19:
+ 232:.\main.c      ****     
+ 233:.\main.c      ****     for(;;)
+ 234:.\main.c      ****     {
+ 235:.\main.c      **** 
+ 236:.\main.c      ****     }
+ 529              		.loc 1 236 0 discriminator 1
+ 530 0274 FEE7     		b	.L19
+ 531              	.L21:
+ 532 0276 00BF     		.align	2
+ 533              	.L20:
+ 534 0278 08000000 		.word	.LC1
+ 535 027c 18000000 		.word	.LC2
+ 536 0280 28000000 		.word	.LC3
+ 537 0284 38000000 		.word	.LC4
+ 538 0288 48000000 		.word	.LC5
+ 539 028c 58000000 		.word	.LC6
+ 540 0290 68000000 		.word	.LC7
+ 541 0294 74000000 		.word	.LC8
+ 542 0298 7C000000 		.word	.LC9
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 16
+
+
+ 543 029c 88000000 		.word	.LC10
+ 544 02a0 8C000000 		.word	.LC11
+ 545 02a4 9C000000 		.word	.LC12
+ 546 02a8 B0000000 		.word	.LC13
+ 547 02ac BC000000 		.word	.LC14
+ 548 02b0 00000000 		.word	sdFile
+ 549 02b4 C4000000 		.word	.LC15
+ 550 02b8 C8000000 		.word	.LC16
+ 551 02bc D0000000 		.word	.LC17
+ 552 02c0 DC000000 		.word	.LC18
+ 553 02c4 E8000000 		.word	.LC19
+ 554 02c8 F8000000 		.word	.LC20
+ 555 02cc 08010000 		.word	.LC21
+ 556 02d0 18010000 		.word	.LC22
+ 557 02d4 28010000 		.word	.LC23
+ 558 02d8 38010000 		.word	.LC24
+ 559 02dc 48010000 		.word	.LC25
+ 560 02e0 50010000 		.word	.LC26
+ 561 02e4 58010000 		.word	.LC27
+ 562 02e8 68010000 		.word	.LC28
+ 563 02ec 74010000 		.word	.LC29
+ 564 02f0 84010000 		.word	.LC30
+ 565 02f4 94010000 		.word	.LC31
+ 566 02f8 A4010000 		.word	.LC32
+ 567              		.cfi_endproc
+ 568              	.LFE57:
+ 569              		.size	main, .-main
+ 570              		.text
+ 571              	.Letext0:
+ 572              		.file 2 "c:\\program files\\cypress\\psoc creator\\3.1\\psoc creator\\import\\gnu_cs\\arm\\4.8.4\\
+ 573              		.file 3 "c:\\program files\\cypress\\psoc creator\\3.1\\psoc creator\\import\\gnu_cs\\arm\\4.8.4\\
+ 574              		.file 4 ".\\Generated_Source\\PSoC5/cytypes.h"
+ 575              		.file 5 "..\\emFile_V322c\\Code\\Include\\PSoC5/FS_Types.h"
+ 576              		.file 6 ".\\Generated_Source\\PSoC5/core_cm3.h"
+ 577              		.section	.debug_info,"",%progbits
+ 578              	.Ldebug_info0:
+ 579 0000 75010000 		.4byte	0x175
+ 580 0004 0400     		.2byte	0x4
+ 581 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 582 000a 04       		.byte	0x4
+ 583 000b 01       		.uleb128 0x1
+ 584 000c 14010000 		.4byte	.LASF22
+ 585 0010 01       		.byte	0x1
+ 586 0011 E6000000 		.4byte	.LASF23
+ 587 0015 14000000 		.4byte	.LASF24
+ 588 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 589 001d 00000000 		.4byte	0
+ 590 0021 00000000 		.4byte	.Ldebug_line0
+ 591 0025 02       		.uleb128 0x2
+ 592 0026 01       		.byte	0x1
+ 593 0027 06       		.byte	0x6
+ 594 0028 08010000 		.4byte	.LASF0
+ 595 002c 02       		.uleb128 0x2
+ 596 002d 01       		.byte	0x1
+ 597 002e 08       		.byte	0x8
+ 598 002f CA000000 		.4byte	.LASF1
+ 599 0033 02       		.uleb128 0x2
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 17
+
+
+ 600 0034 02       		.byte	0x2
+ 601 0035 05       		.byte	0x5
+ 602 0036 B3010000 		.4byte	.LASF2
+ 603 003a 02       		.uleb128 0x2
+ 604 003b 02       		.byte	0x2
+ 605 003c 07       		.byte	0x7
+ 606 003d AF000000 		.4byte	.LASF3
+ 607 0041 03       		.uleb128 0x3
+ 608 0042 90010000 		.4byte	.LASF9
+ 609 0046 02       		.byte	0x2
+ 610 0047 37       		.byte	0x37
+ 611 0048 4C000000 		.4byte	0x4c
+ 612 004c 02       		.uleb128 0x2
+ 613 004d 04       		.byte	0x4
+ 614 004e 05       		.byte	0x5
+ 615 004f DD000000 		.4byte	.LASF4
+ 616 0053 02       		.uleb128 0x2
+ 617 0054 04       		.byte	0x4
+ 618 0055 07       		.byte	0x7
+ 619 0056 86000000 		.4byte	.LASF5
+ 620 005a 02       		.uleb128 0x2
+ 621 005b 08       		.byte	0x8
+ 622 005c 05       		.byte	0x5
+ 623 005d 00000000 		.4byte	.LASF6
+ 624 0061 02       		.uleb128 0x2
+ 625 0062 08       		.byte	0x8
+ 626 0063 07       		.byte	0x7
+ 627 0064 98000000 		.4byte	.LASF7
+ 628 0068 04       		.uleb128 0x4
+ 629 0069 04       		.byte	0x4
+ 630 006a 05       		.byte	0x5
+ 631 006b 696E7400 		.ascii	"int\000"
+ 632 006f 02       		.uleb128 0x2
+ 633 0070 04       		.byte	0x4
+ 634 0071 07       		.byte	0x7
+ 635 0072 6D000000 		.4byte	.LASF8
+ 636 0076 03       		.uleb128 0x3
+ 637 0077 C4010000 		.4byte	.LASF10
+ 638 007b 03       		.byte	0x3
+ 639 007c 41       		.byte	0x41
+ 640 007d 41000000 		.4byte	0x41
+ 641 0081 03       		.uleb128 0x3
+ 642 0082 BD010000 		.4byte	.LASF11
+ 643 0086 04       		.byte	0x4
+ 644 0087 A2       		.byte	0xa2
+ 645 0088 3A000000 		.4byte	0x3a
+ 646 008c 02       		.uleb128 0x2
+ 647 008d 04       		.byte	0x4
+ 648 008e 04       		.byte	0x4
+ 649 008f A4010000 		.4byte	.LASF12
+ 650 0093 02       		.uleb128 0x2
+ 651 0094 08       		.byte	0x8
+ 652 0095 04       		.byte	0x4
+ 653 0096 EF000000 		.4byte	.LASF13
+ 654 009a 02       		.uleb128 0x2
+ 655 009b 01       		.byte	0x1
+ 656 009c 08       		.byte	0x8
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 18
+
+
+ 657 009d D8000000 		.4byte	.LASF14
+ 658 00a1 02       		.uleb128 0x2
+ 659 00a2 04       		.byte	0x4
+ 660 00a3 07       		.byte	0x7
+ 661 00a4 CC010000 		.4byte	.LASF15
+ 662 00a8 05       		.uleb128 0x5
+ 663 00a9 04       		.byte	0x4
+ 664 00aa 9A000000 		.4byte	0x9a
+ 665 00ae 03       		.uleb128 0x3
+ 666 00af C2000000 		.4byte	.LASF16
+ 667 00b3 05       		.byte	0x5
+ 668 00b4 7E       		.byte	0x7e
+ 669 00b5 B9000000 		.4byte	0xb9
+ 670 00b9 06       		.uleb128 0x6
+ 671 00ba C2000000 		.4byte	.LASF16
+ 672 00be 05       		.uleb128 0x5
+ 673 00bf 04       		.byte	0x4
+ 674 00c0 AE000000 		.4byte	0xae
+ 675 00c4 07       		.uleb128 0x7
+ 676 00c5 AA010000 		.4byte	.LASF25
+ 677 00c9 01       		.byte	0x1
+ 678 00ca 28       		.byte	0x28
+ 679 00cb 00000000 		.4byte	.LFB56
+ 680 00cf 50000000 		.4byte	.LFE56-.LFB56
+ 681 00d3 01       		.uleb128 0x1
+ 682 00d4 9C       		.byte	0x9c
+ 683 00d5 F6000000 		.4byte	0xf6
+ 684 00d9 08       		.uleb128 0x8
+ 685 00da F6000000 		.4byte	.LASF17
+ 686 00de 01       		.byte	0x1
+ 687 00df 28       		.byte	0x28
+ 688 00e0 3A000000 		.4byte	0x3a
+ 689 00e4 02       		.uleb128 0x2
+ 690 00e5 91       		.byte	0x91
+ 691 00e6 76       		.sleb128 -10
+ 692 00e7 09       		.uleb128 0x9
+ 693 00e8 73747200 		.ascii	"str\000"
+ 694 00ec 01       		.byte	0x1
+ 695 00ed 28       		.byte	0x28
+ 696 00ee A8000000 		.4byte	0xa8
+ 697 00f2 02       		.uleb128 0x2
+ 698 00f3 91       		.byte	0x91
+ 699 00f4 70       		.sleb128 -16
+ 700 00f5 00       		.byte	0
+ 701 00f6 0A       		.uleb128 0xa
+ 702 00f7 81000000 		.4byte	.LASF26
+ 703 00fb 01       		.byte	0x1
+ 704 00fc 3D       		.byte	0x3d
+ 705 00fd 00000000 		.4byte	.LFB57
+ 706 0101 FC020000 		.4byte	.LFE57-.LFB57
+ 707 0105 01       		.uleb128 0x1
+ 708 0106 9C       		.byte	0x9c
+ 709 0107 36010000 		.4byte	0x136
+ 710 010b 0B       		.uleb128 0xb
+ 711 010c 9A010000 		.4byte	.LASF18
+ 712 0110 01       		.byte	0x1
+ 713 0111 3F       		.byte	0x3f
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 19
+
+
+ 714 0112 36010000 		.4byte	0x136
+ 715 0116 02       		.uleb128 0x2
+ 716 0117 91       		.byte	0x91
+ 717 0118 64       		.sleb128 -28
+ 718 0119 0B       		.uleb128 0xb
+ 719 011a F6000000 		.4byte	.LASF17
+ 720 011e 01       		.byte	0x1
+ 721 011f 40       		.byte	0x40
+ 722 0120 3A000000 		.4byte	0x3a
+ 723 0124 02       		.uleb128 0x2
+ 724 0125 91       		.byte	0x91
+ 725 0126 76       		.sleb128 -10
+ 726 0127 0B       		.uleb128 0xb
+ 727 0128 0E000000 		.4byte	.LASF19
+ 728 012c 01       		.byte	0x1
+ 729 012d 41       		.byte	0x41
+ 730 012e BE000000 		.4byte	0xbe
+ 731 0132 02       		.uleb128 0x2
+ 732 0133 91       		.byte	0x91
+ 733 0134 70       		.sleb128 -16
+ 734 0135 00       		.byte	0
+ 735 0136 0C       		.uleb128 0xc
+ 736 0137 9A000000 		.4byte	0x9a
+ 737 013b 46010000 		.4byte	0x146
+ 738 013f 0D       		.uleb128 0xd
+ 739 0140 A1000000 		.4byte	0xa1
+ 740 0144 09       		.byte	0x9
+ 741 0145 00       		.byte	0
+ 742 0146 0E       		.uleb128 0xe
+ 743 0147 FB000000 		.4byte	.LASF20
+ 744 014b 06       		.byte	0x6
+ 745 014c 1606     		.2byte	0x616
+ 746 014e 52010000 		.4byte	0x152
+ 747 0152 0F       		.uleb128 0xf
+ 748 0153 76000000 		.4byte	0x76
+ 749 0157 0C       		.uleb128 0xc
+ 750 0158 9A000000 		.4byte	0x9a
+ 751 015c 67010000 		.4byte	0x167
+ 752 0160 0D       		.uleb128 0xd
+ 753 0161 A1000000 		.4byte	0xa1
+ 754 0165 08       		.byte	0x8
+ 755 0166 00       		.byte	0
+ 756 0167 10       		.uleb128 0x10
+ 757 0168 7A000000 		.4byte	.LASF21
+ 758 016c 01       		.byte	0x1
+ 759 016d 25       		.byte	0x25
+ 760 016e 57010000 		.4byte	0x157
+ 761 0172 05       		.uleb128 0x5
+ 762 0173 03       		.byte	0x3
+ 763 0174 00000000 		.4byte	sdFile
+ 764 0178 00       		.byte	0
+ 765              		.section	.debug_abbrev,"",%progbits
+ 766              	.Ldebug_abbrev0:
+ 767 0000 01       		.uleb128 0x1
+ 768 0001 11       		.uleb128 0x11
+ 769 0002 01       		.byte	0x1
+ 770 0003 25       		.uleb128 0x25
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 20
+
+
+ 771 0004 0E       		.uleb128 0xe
+ 772 0005 13       		.uleb128 0x13
+ 773 0006 0B       		.uleb128 0xb
+ 774 0007 03       		.uleb128 0x3
+ 775 0008 0E       		.uleb128 0xe
+ 776 0009 1B       		.uleb128 0x1b
+ 777 000a 0E       		.uleb128 0xe
+ 778 000b 55       		.uleb128 0x55
+ 779 000c 17       		.uleb128 0x17
+ 780 000d 11       		.uleb128 0x11
+ 781 000e 01       		.uleb128 0x1
+ 782 000f 10       		.uleb128 0x10
+ 783 0010 17       		.uleb128 0x17
+ 784 0011 00       		.byte	0
+ 785 0012 00       		.byte	0
+ 786 0013 02       		.uleb128 0x2
+ 787 0014 24       		.uleb128 0x24
+ 788 0015 00       		.byte	0
+ 789 0016 0B       		.uleb128 0xb
+ 790 0017 0B       		.uleb128 0xb
+ 791 0018 3E       		.uleb128 0x3e
+ 792 0019 0B       		.uleb128 0xb
+ 793 001a 03       		.uleb128 0x3
+ 794 001b 0E       		.uleb128 0xe
+ 795 001c 00       		.byte	0
+ 796 001d 00       		.byte	0
+ 797 001e 03       		.uleb128 0x3
+ 798 001f 16       		.uleb128 0x16
+ 799 0020 00       		.byte	0
+ 800 0021 03       		.uleb128 0x3
+ 801 0022 0E       		.uleb128 0xe
+ 802 0023 3A       		.uleb128 0x3a
+ 803 0024 0B       		.uleb128 0xb
+ 804 0025 3B       		.uleb128 0x3b
+ 805 0026 0B       		.uleb128 0xb
+ 806 0027 49       		.uleb128 0x49
+ 807 0028 13       		.uleb128 0x13
+ 808 0029 00       		.byte	0
+ 809 002a 00       		.byte	0
+ 810 002b 04       		.uleb128 0x4
+ 811 002c 24       		.uleb128 0x24
+ 812 002d 00       		.byte	0
+ 813 002e 0B       		.uleb128 0xb
+ 814 002f 0B       		.uleb128 0xb
+ 815 0030 3E       		.uleb128 0x3e
+ 816 0031 0B       		.uleb128 0xb
+ 817 0032 03       		.uleb128 0x3
+ 818 0033 08       		.uleb128 0x8
+ 819 0034 00       		.byte	0
+ 820 0035 00       		.byte	0
+ 821 0036 05       		.uleb128 0x5
+ 822 0037 0F       		.uleb128 0xf
+ 823 0038 00       		.byte	0
+ 824 0039 0B       		.uleb128 0xb
+ 825 003a 0B       		.uleb128 0xb
+ 826 003b 49       		.uleb128 0x49
+ 827 003c 13       		.uleb128 0x13
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 21
+
+
+ 828 003d 00       		.byte	0
+ 829 003e 00       		.byte	0
+ 830 003f 06       		.uleb128 0x6
+ 831 0040 13       		.uleb128 0x13
+ 832 0041 00       		.byte	0
+ 833 0042 03       		.uleb128 0x3
+ 834 0043 0E       		.uleb128 0xe
+ 835 0044 3C       		.uleb128 0x3c
+ 836 0045 19       		.uleb128 0x19
+ 837 0046 00       		.byte	0
+ 838 0047 00       		.byte	0
+ 839 0048 07       		.uleb128 0x7
+ 840 0049 2E       		.uleb128 0x2e
+ 841 004a 01       		.byte	0x1
+ 842 004b 3F       		.uleb128 0x3f
+ 843 004c 19       		.uleb128 0x19
+ 844 004d 03       		.uleb128 0x3
+ 845 004e 0E       		.uleb128 0xe
+ 846 004f 3A       		.uleb128 0x3a
+ 847 0050 0B       		.uleb128 0xb
+ 848 0051 3B       		.uleb128 0x3b
+ 849 0052 0B       		.uleb128 0xb
+ 850 0053 27       		.uleb128 0x27
+ 851 0054 19       		.uleb128 0x19
+ 852 0055 11       		.uleb128 0x11
+ 853 0056 01       		.uleb128 0x1
+ 854 0057 12       		.uleb128 0x12
+ 855 0058 06       		.uleb128 0x6
+ 856 0059 40       		.uleb128 0x40
+ 857 005a 18       		.uleb128 0x18
+ 858 005b 9642     		.uleb128 0x2116
+ 859 005d 19       		.uleb128 0x19
+ 860 005e 01       		.uleb128 0x1
+ 861 005f 13       		.uleb128 0x13
+ 862 0060 00       		.byte	0
+ 863 0061 00       		.byte	0
+ 864 0062 08       		.uleb128 0x8
+ 865 0063 05       		.uleb128 0x5
+ 866 0064 00       		.byte	0
+ 867 0065 03       		.uleb128 0x3
+ 868 0066 0E       		.uleb128 0xe
+ 869 0067 3A       		.uleb128 0x3a
+ 870 0068 0B       		.uleb128 0xb
+ 871 0069 3B       		.uleb128 0x3b
+ 872 006a 0B       		.uleb128 0xb
+ 873 006b 49       		.uleb128 0x49
+ 874 006c 13       		.uleb128 0x13
+ 875 006d 02       		.uleb128 0x2
+ 876 006e 18       		.uleb128 0x18
+ 877 006f 00       		.byte	0
+ 878 0070 00       		.byte	0
+ 879 0071 09       		.uleb128 0x9
+ 880 0072 05       		.uleb128 0x5
+ 881 0073 00       		.byte	0
+ 882 0074 03       		.uleb128 0x3
+ 883 0075 08       		.uleb128 0x8
+ 884 0076 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 22
+
+
+ 885 0077 0B       		.uleb128 0xb
+ 886 0078 3B       		.uleb128 0x3b
+ 887 0079 0B       		.uleb128 0xb
+ 888 007a 49       		.uleb128 0x49
+ 889 007b 13       		.uleb128 0x13
+ 890 007c 02       		.uleb128 0x2
+ 891 007d 18       		.uleb128 0x18
+ 892 007e 00       		.byte	0
+ 893 007f 00       		.byte	0
+ 894 0080 0A       		.uleb128 0xa
+ 895 0081 2E       		.uleb128 0x2e
+ 896 0082 01       		.byte	0x1
+ 897 0083 3F       		.uleb128 0x3f
+ 898 0084 19       		.uleb128 0x19
+ 899 0085 03       		.uleb128 0x3
+ 900 0086 0E       		.uleb128 0xe
+ 901 0087 3A       		.uleb128 0x3a
+ 902 0088 0B       		.uleb128 0xb
+ 903 0089 3B       		.uleb128 0x3b
+ 904 008a 0B       		.uleb128 0xb
+ 905 008b 11       		.uleb128 0x11
+ 906 008c 01       		.uleb128 0x1
+ 907 008d 12       		.uleb128 0x12
+ 908 008e 06       		.uleb128 0x6
+ 909 008f 40       		.uleb128 0x40
+ 910 0090 18       		.uleb128 0x18
+ 911 0091 9642     		.uleb128 0x2116
+ 912 0093 19       		.uleb128 0x19
+ 913 0094 01       		.uleb128 0x1
+ 914 0095 13       		.uleb128 0x13
+ 915 0096 00       		.byte	0
+ 916 0097 00       		.byte	0
+ 917 0098 0B       		.uleb128 0xb
+ 918 0099 34       		.uleb128 0x34
+ 919 009a 00       		.byte	0
+ 920 009b 03       		.uleb128 0x3
+ 921 009c 0E       		.uleb128 0xe
+ 922 009d 3A       		.uleb128 0x3a
+ 923 009e 0B       		.uleb128 0xb
+ 924 009f 3B       		.uleb128 0x3b
+ 925 00a0 0B       		.uleb128 0xb
+ 926 00a1 49       		.uleb128 0x49
+ 927 00a2 13       		.uleb128 0x13
+ 928 00a3 02       		.uleb128 0x2
+ 929 00a4 18       		.uleb128 0x18
+ 930 00a5 00       		.byte	0
+ 931 00a6 00       		.byte	0
+ 932 00a7 0C       		.uleb128 0xc
+ 933 00a8 01       		.uleb128 0x1
+ 934 00a9 01       		.byte	0x1
+ 935 00aa 49       		.uleb128 0x49
+ 936 00ab 13       		.uleb128 0x13
+ 937 00ac 01       		.uleb128 0x1
+ 938 00ad 13       		.uleb128 0x13
+ 939 00ae 00       		.byte	0
+ 940 00af 00       		.byte	0
+ 941 00b0 0D       		.uleb128 0xd
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 23
+
+
+ 942 00b1 21       		.uleb128 0x21
+ 943 00b2 00       		.byte	0
+ 944 00b3 49       		.uleb128 0x49
+ 945 00b4 13       		.uleb128 0x13
+ 946 00b5 2F       		.uleb128 0x2f
+ 947 00b6 0B       		.uleb128 0xb
+ 948 00b7 00       		.byte	0
+ 949 00b8 00       		.byte	0
+ 950 00b9 0E       		.uleb128 0xe
+ 951 00ba 34       		.uleb128 0x34
+ 952 00bb 00       		.byte	0
+ 953 00bc 03       		.uleb128 0x3
+ 954 00bd 0E       		.uleb128 0xe
+ 955 00be 3A       		.uleb128 0x3a
+ 956 00bf 0B       		.uleb128 0xb
+ 957 00c0 3B       		.uleb128 0x3b
+ 958 00c1 05       		.uleb128 0x5
+ 959 00c2 49       		.uleb128 0x49
+ 960 00c3 13       		.uleb128 0x13
+ 961 00c4 3F       		.uleb128 0x3f
+ 962 00c5 19       		.uleb128 0x19
+ 963 00c6 3C       		.uleb128 0x3c
+ 964 00c7 19       		.uleb128 0x19
+ 965 00c8 00       		.byte	0
+ 966 00c9 00       		.byte	0
+ 967 00ca 0F       		.uleb128 0xf
+ 968 00cb 35       		.uleb128 0x35
+ 969 00cc 00       		.byte	0
+ 970 00cd 49       		.uleb128 0x49
+ 971 00ce 13       		.uleb128 0x13
+ 972 00cf 00       		.byte	0
+ 973 00d0 00       		.byte	0
+ 974 00d1 10       		.uleb128 0x10
+ 975 00d2 34       		.uleb128 0x34
+ 976 00d3 00       		.byte	0
+ 977 00d4 03       		.uleb128 0x3
+ 978 00d5 0E       		.uleb128 0xe
+ 979 00d6 3A       		.uleb128 0x3a
+ 980 00d7 0B       		.uleb128 0xb
+ 981 00d8 3B       		.uleb128 0x3b
+ 982 00d9 0B       		.uleb128 0xb
+ 983 00da 49       		.uleb128 0x49
+ 984 00db 13       		.uleb128 0x13
+ 985 00dc 3F       		.uleb128 0x3f
+ 986 00dd 19       		.uleb128 0x19
+ 987 00de 02       		.uleb128 0x2
+ 988 00df 18       		.uleb128 0x18
+ 989 00e0 00       		.byte	0
+ 990 00e1 00       		.byte	0
+ 991 00e2 00       		.byte	0
+ 992              		.section	.debug_aranges,"",%progbits
+ 993 0000 24000000 		.4byte	0x24
+ 994 0004 0200     		.2byte	0x2
+ 995 0006 00000000 		.4byte	.Ldebug_info0
+ 996 000a 04       		.byte	0x4
+ 997 000b 00       		.byte	0
+ 998 000c 0000     		.2byte	0
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 24
+
+
+ 999 000e 0000     		.2byte	0
+ 1000 0010 00000000 		.4byte	.LFB56
+ 1001 0014 50000000 		.4byte	.LFE56-.LFB56
+ 1002 0018 00000000 		.4byte	.LFB57
+ 1003 001c FC020000 		.4byte	.LFE57-.LFB57
+ 1004 0020 00000000 		.4byte	0
+ 1005 0024 00000000 		.4byte	0
+ 1006              		.section	.debug_ranges,"",%progbits
+ 1007              	.Ldebug_ranges0:
+ 1008 0000 00000000 		.4byte	.LFB56
+ 1009 0004 50000000 		.4byte	.LFE56
+ 1010 0008 00000000 		.4byte	.LFB57
+ 1011 000c FC020000 		.4byte	.LFE57
+ 1012 0010 00000000 		.4byte	0
+ 1013 0014 00000000 		.4byte	0
+ 1014              		.section	.debug_line,"",%progbits
+ 1015              	.Ldebug_line0:
+ 1016 0000 F5010000 		.section	.debug_str,"MS",%progbits,1
+ 1016      02007601 
+ 1016      00000201 
+ 1016      FB0E0D00 
+ 1016      01010101 
+ 1017              	.LASF6:
+ 1018 0000 6C6F6E67 		.ascii	"long long int\000"
+ 1018      206C6F6E 
+ 1018      6720696E 
+ 1018      7400
+ 1019              	.LASF19:
+ 1020 000e 7046696C 		.ascii	"pFile\000"
+ 1020      6500
+ 1021              	.LASF24:
+ 1022 0014 433A5C55 		.ascii	"C:\\Users\\pfautley\\Downloads\\finalproject.cydsn\\"
+ 1022      73657273 
+ 1022      5C706661 
+ 1022      75746C65 
+ 1022      795C446F 
+ 1023 0043 66696E61 		.ascii	"finalproject.cydsn\\emFile_Example01.cydsn\000"
+ 1023      6C70726F 
+ 1023      6A656374 
+ 1023      2E637964 
+ 1023      736E5C65 
+ 1024              	.LASF8:
+ 1025 006d 756E7369 		.ascii	"unsigned int\000"
+ 1025      676E6564 
+ 1025      20696E74 
+ 1025      00
+ 1026              	.LASF21:
+ 1027 007a 73644669 		.ascii	"sdFile\000"
+ 1027      6C6500
+ 1028              	.LASF26:
+ 1029 0081 6D61696E 		.ascii	"main\000"
+ 1029      00
+ 1030              	.LASF5:
+ 1031 0086 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1031      20756E73 
+ 1031      69676E65 
+ 1031      6420696E 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 25
+
+
+ 1031      7400
+ 1032              	.LASF7:
+ 1033 0098 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1033      206C6F6E 
+ 1033      6720756E 
+ 1033      7369676E 
+ 1033      65642069 
+ 1034              	.LASF3:
+ 1035 00af 73686F72 		.ascii	"short unsigned int\000"
+ 1035      7420756E 
+ 1035      7369676E 
+ 1035      65642069 
+ 1035      6E7400
+ 1036              	.LASF16:
+ 1037 00c2 46535F46 		.ascii	"FS_FILE\000"
+ 1037      494C4500 
+ 1038              	.LASF1:
+ 1039 00ca 756E7369 		.ascii	"unsigned char\000"
+ 1039      676E6564 
+ 1039      20636861 
+ 1039      7200
+ 1040              	.LASF14:
+ 1041 00d8 63686172 		.ascii	"char\000"
+ 1041      00
+ 1042              	.LASF4:
+ 1043 00dd 6C6F6E67 		.ascii	"long int\000"
+ 1043      20696E74 
+ 1043      00
+ 1044              	.LASF23:
+ 1045 00e6 2E5C6D61 		.ascii	".\\main.c\000"
+ 1045      696E2E63 
+ 1045      00
+ 1046              	.LASF13:
+ 1047 00ef 646F7562 		.ascii	"double\000"
+ 1047      6C6500
+ 1048              	.LASF17:
+ 1049 00f6 73746570 		.ascii	"step\000"
+ 1049      00
+ 1050              	.LASF20:
+ 1051 00fb 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1051      52784275 
+ 1051      66666572 
+ 1051      00
+ 1052              	.LASF0:
+ 1053 0108 7369676E 		.ascii	"signed char\000"
+ 1053      65642063 
+ 1053      68617200 
+ 1054              	.LASF22:
+ 1055 0114 474E5520 		.ascii	"GNU C 4.8.4 20140526 (release) [ARM/embedded-4_8-br"
+ 1055      4320342E 
+ 1055      382E3420 
+ 1055      32303134 
+ 1055      30353236 
+ 1056 0147 616E6368 		.ascii	"anch revision 211358] -mcpu=cortex-m3 -mthumb -g -O"
+ 1056      20726576 
+ 1056      6973696F 
+ 1056      6E203231 
+ARM GAS  C:\Users\pfautley\AppData\Local\Temp\ccbHyss3.s 			page 26
+
+
+ 1056      31333538 
+ 1057 017a 30202D66 		.ascii	"0 -ffunction-sections\000"
+ 1057      66756E63 
+ 1057      74696F6E 
+ 1057      2D736563 
+ 1057      74696F6E 
+ 1058              	.LASF9:
+ 1059 0190 5F5F696E 		.ascii	"__int32_t\000"
+ 1059      7433325F 
+ 1059      7400
+ 1060              	.LASF18:
+ 1061 019a 7364566F 		.ascii	"sdVolName\000"
+ 1061      6C4E616D 
+ 1061      6500
+ 1062              	.LASF12:
+ 1063 01a4 666C6F61 		.ascii	"float\000"
+ 1063      7400
+ 1064              	.LASF25:
+ 1065 01aa 4E657874 		.ascii	"NextStep\000"
+ 1065      53746570 
+ 1065      00
+ 1066              	.LASF2:
+ 1067 01b3 73686F72 		.ascii	"short int\000"
+ 1067      7420696E 
+ 1067      7400
+ 1068              	.LASF11:
+ 1069 01bd 75696E74 		.ascii	"uint16\000"
+ 1069      313600
+ 1070              	.LASF10:
+ 1071 01c4 696E7433 		.ascii	"int32_t\000"
+ 1071      325F7400 
+ 1072              	.LASF15:
+ 1073 01cc 73697A65 		.ascii	"sizetype\000"
+ 1073      74797065 
+ 1073      00
+ 1074              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.4 20140526 (release) [ARM/embedded-4_8-br
